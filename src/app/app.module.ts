@@ -3,6 +3,9 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { FormsModule} from '@angular/forms'
+import {NgxDataTableModule} from 'angular-9-datatable';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -10,7 +13,10 @@ import { AppComponent } from './app.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    NgxDataTableModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

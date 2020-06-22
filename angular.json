@@ -24,9 +24,15 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "./src/styles.css",
+              "./node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "./node_modules/@fortawesome/fontawesome-free/css/all.min.css"
             ],
-            "scripts": []
+            "scripts": [
+              "./node_modules/jquery/dist/jquery.min.js",
+              "./node_modules/popper.js/dist/umd/popper.min.js",
+              "./node_modules/bootstrap/dist/js/bootstrap.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -119,6 +125,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "tp-final-frontend"
+    }
+  },
+  "defaultProject": "tp-final-frontend",
+  "cli": {
+    "analytics": "fc472060-e943-4758-af45-68c2f31b2042"
+  }
 }
