@@ -4,7 +4,7 @@ export class Propietario {
     nombres: String;
     dni: number;
     email: String;
-    teléfono: number;
+    telefono: number;
     
     constructor(){}
 }
