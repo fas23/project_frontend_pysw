@@ -8,7 +8,7 @@ import { Propietario } from '../models/propietario';
 })
 export class PropietarioService {
 
-  urlBase: string = "http://localhost:3000/api/propietarios/"
+  urlBase: string = "http://localhost:3000/api/propietario/"
 
   constructor(private _http: HttpClient) { }
 

@@ -5,7 +5,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule} from '@angular/forms'
 import {NgxDataTableModule} from 'angular-9-datatable';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 import {HttpClientModule} from '@angular/common/http';
+
 import { HeaderComponent } from './components/layout/header/header.component';
 import { FooterComponent } from './components/layout/footer/footer.component';
 import { HomeComponent } from './components/home/home.component';
@@ -25,6 +28,12 @@ import { PropietarioComponent } from './components/propietario/propietario.compo
     FormsModule,
     NgxDataTableModule,
     HttpClientModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      closeButton:true,
+      timeOut:3000,
+      preventDuplicates:true
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
