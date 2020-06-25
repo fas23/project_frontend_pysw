@@ -13,6 +13,7 @@ import { HeaderComponent } from './components/layout/header/header.component';
 import { FooterComponent } from './components/layout/footer/footer.component';
 import { HomeComponent } from './components/home/home.component';
 import { PropietarioComponent } from './components/propietario/propietario.component';
+import { LocalComponent } from './components/local/local.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { PropietarioComponent } from './components/propietario/propietario.compo
     HeaderComponent,
     FooterComponent,
     HomeComponent,
-    PropietarioComponent
+    PropietarioComponent,
+    LocalComponent
   ],
   imports: [
     BrowserModule,
