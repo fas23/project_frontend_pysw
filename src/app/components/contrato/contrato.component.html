@@ -1,0 +1,96 @@
+<div class="card">
+    <div class="card-header">
+        <form #formregistro="ngForm">
+            <div class="card-header bg-info mb-3">
+                <h2>Gestion de Contratos</h2>
+            </div>
+            <div class="form-group row">
+                <label for="idprop" class="col-md-4">Propietario</label>
+                <select id="idprop" class="form-control form-control-sm col-md-8" required
+                     name="propietario" #prop="ngModel"
+                    [(ngModel)] = "contrato.propietario">
+                    <option *ngFor="let propi of propietarios" [ngValue]="prop">{{propi.nombres}}</option>
+                </select>
+              </div>
+            <div class="form-group row">
+                <label for="costo" class="col-md-4 col-sm-12">Costo Total</label>
+                <input type="number" class="form-control col-md-8 col-sm-12" id="costo" name="costo"
+                    placeholder="ingrese costo total" required  [(ngModel)]="contrato.costoTotalAlq"
+                    #costo="ngModel" />
+                <div *ngIf="costo.invalid && (costo.dirty || costo.touched)"
+                    class="alert alert-danger col-12">
+                    <div *ngIf="costo.errors.required">
+                        Costo es campo requerido
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="card-body">
+        <table class="table table-sm">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th>Superficie</th>
+                    <th>Imagen</th>
+                    <th>Costo Mensual</th>
+                    <th>Descripcion</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of locales">
+                    <th>{{item.superficie}}</th>
+                    <td><img src="{{item.imagen}}"></td>
+                    <td>{{item.costomes}}</td>
+                    <td>{{item.descripcion}}</td>
+                    <th><button class="btn btn-dark" (click)="agregarLocal(item)">Agregar</button></th>
+                    <td><button class="btn btn-dark"  (click)="quitarLocal(item)">Quitar</button></td>
+                </tr>
+            </tbody>
+        </table>
+        <button type="button" class="btn btn-primary mr-3" (click)="saveContrato()"
+            [disabled]="!formregistro.form.valid || existe">Agregar</button>
+        <button type="button" class="btn btn-primary align-content-center"
+            [disabled]="!formregistro.form.valid || !existe" (click)="modificarContrato()">Modificar</button>
+        <button type="button" class="btn btn-primary align-content-center" (click)="limpiar()">Limpiar</button>
+    </div>
+    <div class="card-footer">
+        <table class="table table-striped" [mfData]="contratos" #mf="mfDataTable" [mfRowsOnPage]="5">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">
+                        <mfDefaultSorter by="fecha">Fecha</mfDefaultSorter>
+                    </th>
+                    <th scope="col">Propietario</th>
+                    <th scope="col">Locales</th>
+                    <th scope="col">
+                        <mfDefaultSorter by="costoTotalAlq">Costo Total</mfDefaultSorter>
+                    </th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of mf.data">
+                    <td></td>
+                    <td>{{item.fecha }}</td>
+                    <td>{{item.propietario.nombres}}</td>
+                    <td></td>
+                    <td>{{item.costomes | currency: 'USD'}}</td>
+                    <td>
+                        <button class="btn btn-primary btn" (click)="elegirContrato(item)">Seleccinar</button>
+                        <button class="btn btn-primary btn">Borrar</button>
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="4">
+                        <mfBootstrapPaginator [rowsOnPageSet]="[5,10,20]"></mfBootstrapPaginator>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
