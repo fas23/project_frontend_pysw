@@ -14,6 +14,7 @@ import { FooterComponent } from './components/layout/footer/footer.component';
 import { HomeComponent } from './components/home/home.component';
 import { PropietarioComponent } from './components/propietario/propietario.component';
 import { LocalComponent } from './components/local/local.component';
+import { UsuarioComponent } from './components/usuario/usuario.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { LocalComponent } from './components/local/local.component';
     FooterComponent,
     HomeComponent,
     PropietarioComponent,
-    LocalComponent
+    LocalComponent,
+    UsuarioComponent
   ],
   imports: [
     BrowserModule,
