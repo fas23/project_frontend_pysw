@@ -14,8 +14,9 @@ import { FooterComponent } from './components/layout/footer/footer.component';
 import { HomeComponent } from './components/home/home.component';
 import { PropietarioComponent } from './components/propietario/propietario.component';
 import { LocalComponent } from './components/local/local.component';
-//import { UsuarioComponent } from './components/usuario/usuario.component';
+import { UsuarioComponent } from './components/usuario/usuario.component';
 import { ContratoComponent } from './components/contrato/contrato.component';
+import { NovedadComponent } from './components/novedad/novedad.component';
 
 @NgModule({
   declarations: [
@@ -25,8 +26,9 @@ import { ContratoComponent } from './components/contrato/contrato.component';
     HomeComponent,
     PropietarioComponent,
     LocalComponent,
-  //  UsuarioComponent,
-    ContratoComponent
+    UsuarioComponent,
+    ContratoComponent,
+  NovedadComponent
   ],
   imports: [
     BrowserModule,

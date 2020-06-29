@@ -1,6 +1,6 @@
 import { Usuario } from './usuario';
 export class Novedad {
-    i_d: number;
+    id: number;
     Usuario: Usuario;
     Texto: string;
     estado: string;// (pendiente - procesado)

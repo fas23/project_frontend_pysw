@@ -1,0 +1,78 @@
+<div class="card">
+    <div class="card-header">
+        <form #formregistro="ngForm">
+            <div class="card-header bg-info mb-3">
+                <h2>Gestion de Novedades</h2>
+            </div>
+            <div class="form-group row">
+                <label for="texto" class="col-md-4 col-sm-12">Novedad</label>
+                <input type="text" class="form-control col-md-8 col-sm-12" id="texto" name="texto"
+                    placeholder="" required maxlength="120" [(ngModel)]="Novedad.Texto"
+                    #texto="ngModel" />
+                <div *ngIf="texto.invalid && (texto.dirty || texto.touched)"
+                    class="alert alert-danger col-12">
+                    <div *ngIf="texto.errors.required">
+                        invalidao
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="estado" class="col-md-4 col-sm-12">Estado</label>
+                <input type="text" class="form-control col-md-8 col-sm-12" id="estado" name="estado"
+                    placeholder="" required maxlength="12" [(ngModel)]="novedad.estado"
+                    #estado="ngModel" />
+                <div *ngIf="estado.invalid && (estado.dirty || estado.touched)"
+                    class="alert alert-danger col-12">
+                    <div *ngIf="passworderrors.required">
+                        invalido
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="idUsuario" class="col-md-4">Usuario</label>
+                <select id="idUsuario" class="form-control form-control-sm col-md-8" required name="propietario"
+                    #prop="ngModel" [(ngModel)]="contrato.propietario">
+                    <option *ngFor="let prop of propietarios" [ngValue]="prop">{{prop.nombres}}</option>
+                </select>
+            </div>
+
+
+        </form>
+    </div>
+    <div class="card-body">
+        <button type="button" class="btn btn-primary mr-3" (click)="altaNovedad()"
+            [disabled]="!formregistro.form.valid || existe">Agregar</button>
+        <button type="button" class="btn btn-primary align-content-center"
+            [disabled]="!formregistro.form.valid || !existe" (click)="modificarNovedad()">Modificar</button>
+        <button type="button" class="btn btn-primary align-content-center" (click)="limpiar()">Limpiar</button>
+    </div>
+    <div class="card-footer">
+        <table class="table table-striped" [mfData]="novedades" #mf="mfDataTable" [mfRowsOnPage]="5">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Texto</th>
+                    <th scope="col">Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of mf.data">
+                    <td></td>
+                    <td>{{item.Texto}}</td>
+                    <td>{{item.estado}}</td>
+                    <td>
+                        <button class="btn btn-primary btn" (click)="elegirNovedad(item)">Seleccinar</button>
+                        <button class="btn btn-primary btn" (click)="bajaNovedad(item)">Borrar</button>
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="4">
+                        <mfBootstrapPaginator [rowsOnPageSet]="[5,10,20]"></mfBootstrapPaginator>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>

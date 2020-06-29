@@ -6,7 +6,7 @@ import { Usuario } from '../models/usuario';
 @Injectable({
   providedIn: 'root'
 })
-export class UsuarioServiceService {
+export class UsuarioService {
 
   userLoggedIn: boolean = false;
   userLogged: Usuario;
