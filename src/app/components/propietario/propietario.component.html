@@ -2,6 +2,15 @@
     <form #ngFormregistro="ngForm" (ngSubmit)="guardarPropietario(ngFormregistro)" class="col-md-10 offset-1" action="">
         <h2 class="text-center mt-3 mb-3"> Propietario</h2>
 
+        <!--posteo de Facebook-->
+        <div class="form-group"> <label for="my-input">Text</label>
+            <input id="my-input" class="form-control" type="text" [(ngModel)]="mensaje" name="mensaje">
+        </div>
+
+        <button class="btn btn-primary" (click)="postFb()">Postear</button>
+        <!--fin posteo de Facebook-->
+
+
         <div class="form-group row">
 
             <label for="idapellido" class="col-md-4">Apellido</label>
