@@ -15,6 +15,7 @@ export class NovedadComponent implements OnInit {
 
   novedad: Novedad;
   novedades: Array<Novedad>;
+  existe : boolean = false;
 
   constructor(private servicio: NovedadService, private _toastr: ToastrService, private usServicio: UsuarioService) {
     this.novedad = new Novedad();

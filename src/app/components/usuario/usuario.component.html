@@ -1,17 +1,18 @@
-<div class="card">
+<div class="container">
+    <div class="card">
     <div class="card-header">
         <form #formregistro="ngForm">
             <div class="card-header bg-info mb-3">
                 <h2>Gestion de Usuarios</h2>
             </div>
             <div class="form-group row">
-                <label for="usuario" class="col-md-4 col-sm-12">Usuario</label>
-                <input type="text" class="form-control col-md-8 col-sm-12" id="usuario" name="usuario"
+                <label for="user" class="col-md-4 col-sm-12">Usuario</label>
+                <input type="text" class="form-control col-md-8 col-sm-12" id="user" name="user"
                     placeholder="ingrese nombre de usuario" required maxlength="12" [(ngModel)]="usuario.usuario"
-                    #usuario="ngModel" />
-                <div *ngIf="usuario.invalid && (usuario.dirty || usuario.touched)"
+                    #user="ngModel" />
+                <div *ngIf="user.invalid && (user.dirty || user.touched)"
                     class="alert alert-danger col-12">
-                    <div *ngIf="usuario.errors.required">
+                    <div *ngIf="user.errors.required">
                         nombre de usuario requerido
                     </div>
                 </div>
@@ -23,7 +24,7 @@
                     #password="ngModel" />
                 <div *ngIf="password.invalid && (password.dirty || password.touched)"
                     class="alert alert-danger col-12">
-                    <div *ngIf="passworderrors.required">
+                    <div *ngIf="password.errors.required">
                         contraseña de usuario requerido
                     </div>
                 </div>
@@ -82,4 +83,6 @@
             </tfoot>
         </table>
     </div>
+</div>
+
 </div>

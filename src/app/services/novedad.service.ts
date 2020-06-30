@@ -28,7 +28,7 @@ export class NovedadService {
         "Content-Type": "application/json"
       })
     };
-    var body = JSON.stringify(local);
+    var body = JSON.stringify(novedad);
     return this._http.post(this.urlBase, body , httpOptions );
   }
 
