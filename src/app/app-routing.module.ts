@@ -7,7 +7,7 @@ import {ContratoComponent} from './components/contrato/contrato.component';
 import {NovedadComponent} from './components/novedad/novedad.component';
 import {UsuarioComponent} from './components/usuario/usuario.component';
 import {LoginComponent} from './components/login/login.component';
-
+import { NoticiaComponent } from './components/noticia/noticia.component';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
@@ -17,6 +17,7 @@ const routes: Routes = [
   {path: 'novedad', component: NovedadComponent},
   {path: 'usuario', component: UsuarioComponent},
   {path: 'login', component: LoginComponent },
+  {path: 'noticia', component: NoticiaComponent},
   {path: '**', pathMatch: 'full' , redirectTo: 'home'}
 ];
 
