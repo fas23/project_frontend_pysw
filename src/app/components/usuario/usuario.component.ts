@@ -14,7 +14,7 @@ export class UsuarioComponent implements OnInit {
    usuarios: Array<Usuario>;
    existe: boolean = false;
 
-  constructor(private servicio:UsuarioService, private _toastr:ToastrService) { 
+  constructor(public servicio:UsuarioService, private _toastr:ToastrService) { 
      this.usuario = new Usuario();
      this.usuarios = new Array<Usuario>();
      this.listarUsuario();

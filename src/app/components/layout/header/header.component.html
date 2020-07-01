@@ -9,21 +9,27 @@
         <li class="nav-item active">
           <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
         </li>
-        <li class="nav-item">
+        <li *ngIf="loginService.userLoggedIn && loginService.userLogged.perfil == 'administrativo'" class="nav-item">
           <a class="nav-link" [routerLink]="['/propietario']" routerLinkActive="router-link-active" >Propietario</a>
         </li>
-        <li class="nav-item">
+        <li *ngIf="loginService.userLoggedIn &&  loginService.userLogged.perfil == 'administrativo'" class="nav-item">
           <a class="nav-link" [routerLink]="['/gestionLocales']" routerLinkActive="router-link-active" >ABM Locales</a>
         </li>
-        <li class="nav-item">
+        <li *ngIf="loginService.userLoggedIn &&  loginService.userLogged.perfil == 'administrativo'" class="nav-item">
           <a class="nav-link" [routerLink]="['/contrato']" routerLinkActive="router-link-active" >Contrato</a>
         </li>
-        <li class="nav-item">
+        <li *ngIf="loginService.userLoggedIn && loginService.userLogged.perfil == 'administrativo'" class="nav-item">
           <a class="nav-link" [routerLink]="['/novedad']" routerLinkActive="router-link-active" >Novedad</a>
         </li>
-        <li class="nav-item">
+        <li *ngIf="loginService.userLoggedIn && loginService.userLogged.perfil == 'administrativo'" class="nav-item">
           <a class="nav-link" [routerLink]="['/usuario']" routerLinkActive="router-link-active" >Usuario</a>
         </li>
+        <div>
+          <a *ngIf="!loginService.userLoggedIn" [routerLink]="['login']">(login)</a>
+          <a *ngIf="loginService.userLoggedIn" [routerLink]="['login']" (click)="logout()">
+          {{loginService.userLogged.usuario}}   (logout)
+          </a>
+          </div>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Dropdown

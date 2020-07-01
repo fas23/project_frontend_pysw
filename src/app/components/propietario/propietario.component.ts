@@ -3,6 +3,7 @@ import { Propietario } from '../../models/propietario';
 import { PropietarioService } from '../../services/propietario.service';
 import { NgForm } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import {UsuarioService} from './../../services/usuario.service';
 
 @Component({
   selector: 'app-propietario',
@@ -14,7 +15,7 @@ export class PropietarioComponent implements OnInit {
   propietario: Propietario;
   propietarios: Array<Propietario>;
 
-  constructor(private propietarioService: PropietarioService, private _toastr: ToastrService ) {
+  constructor(private propietarioService: PropietarioService, private _toastr: ToastrService, public loginService:UsuarioService) {
     this.propietario = new Propietario();
     this.propietarios = new Array<Propietario>();
     this.refrescarPropietarios();

@@ -6,7 +6,7 @@ import {LocalComponent} from './components/local/local.component';
 import {ContratoComponent} from './components/contrato/contrato.component';
 import {NovedadComponent} from './components/novedad/novedad.component';
 import {UsuarioComponent} from './components/usuario/usuario.component';
-
+import {LoginComponent} from './components/login/login.component';
 
 
 const routes: Routes = [
@@ -16,7 +16,7 @@ const routes: Routes = [
   {path: 'contrato', component: ContratoComponent},
   {path: 'novedad', component: NovedadComponent},
   {path: 'usuario', component: UsuarioComponent},
-  //{ path: 'login', component: LoginComponent },
+  {path: 'login', component: LoginComponent },
   {path: '**', pathMatch: 'full' , redirectTo: 'home'}
 ];
 

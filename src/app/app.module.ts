@@ -17,6 +17,8 @@ import { LocalComponent } from './components/local/local.component';
 import { UsuarioComponent } from './components/usuario/usuario.component';
 import { ContratoComponent } from './components/contrato/contrato.component';
 import { NovedadComponent } from './components/novedad/novedad.component';
+import {UsuarioService} from './services/usuario.service';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,8 @@ import { NovedadComponent } from './components/novedad/novedad.component';
     LocalComponent,
     UsuarioComponent,
     ContratoComponent,
-  NovedadComponent
+  NovedadComponent,
+  LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +46,7 @@ import { NovedadComponent } from './components/novedad/novedad.component';
       preventDuplicates:true
     })
   ],
-  providers: [],
+  providers: [UsuarioService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

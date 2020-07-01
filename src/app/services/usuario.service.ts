@@ -14,15 +14,17 @@ export class UsuarioService {
 
   constructor(private _http:HttpClient) { }
 
-    login(username: string, password: string): Observable<any>{
+    public login(username: string, password: string): Observable<any>{
       const httpOption = {
         headers: new HttpHeaders({
           'Content-Type':  'application/json'
         }) 
       } 
-      let body = JSON.stringify({ username: username, password: password });
-      return this._http.post(this.urlBase, body, httpOption);
+      let body = JSON.stringify({ usuario: username, password: password });
+      return this._http.post(this.urlBase+"login/", body, httpOption);
     }
+
+    
 
     public logout() {
       this.userLogged = new Usuario();

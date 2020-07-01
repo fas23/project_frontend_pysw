@@ -4,6 +4,7 @@ import { ContratoService } from './../../services/contrato.service';
 import { ToastrService } from 'ngx-toastr';
 import { Propietario } from 'src/app/models/propietario';
 import { Local } from './../../models/local';
+import {UsuarioService} from './../../services/usuario.service';
 
 @Component({
   selector: 'app-contrato',
@@ -19,7 +20,7 @@ export class ContratoComponent implements OnInit {
   locales: Array<Local>;
   cerrado : boolean = false;
 
-  constructor(private conService: ContratoService, private _toastr: ToastrService) {
+  constructor(private conService: ContratoService, private _toastr: ToastrService, public loginService:UsuarioService) {
     this.contrato = new Contrato();
     this.contratos = new Array<Contrato>();
     this.propietarios = new Array<Propietario>();
