@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Novedad } from './../../models/novedad';
-
+import { Usuario } from './../../models/usuario';
 import { NovedadService } from './../../services/novedad.service';
 import { UsuarioService } from './../../services/usuario.service';
 import {ToastrService} from 'ngx-toastr';
-import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-novedad',
@@ -12,15 +11,18 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./novedad.component.css']
 })
 export class NovedadComponent implements OnInit {
-
+ 
   novedad: Novedad;
   novedades: Array<Novedad>;
   existe : boolean = false;
+  usuarios: Array<Usuario>;
 
   constructor(private servicio: NovedadService, private _toastr: ToastrService, private usServicio: UsuarioService) {
     this.novedad = new Novedad();
     this.novedades = new Array<Novedad>();
+    this.usuarios = new Array<Usuario>();
     this.listarNovedades();
+    this.listarUsuarios();
    }
  
   altaNovedad(){
@@ -82,6 +84,23 @@ export class NovedadComponent implements OnInit {
     )
   }
 
+  listarUsuarios(){
+    this.usuarios = new Array<Usuario>();
+    this.usServicio.getUsuarios().subscribe(
+      (result)=>{
+        var us: Usuario = new Usuario();  
+        result.forEach(element => {
+          Object.assign(us, element); 
+          this.usuarios.push(us); 
+          us = new Usuario();
+          console.log(result);
+        });
+      },
+      (error)=>{
+        console.log(error);
+      } 
+    )
+  }
   
   elegirNovedad(novedad: Novedad){
     var nv = new Novedad();
