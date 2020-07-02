@@ -28,6 +28,7 @@ export class NoticiaComponent implements OnInit {
   // trae las noticias de la API
   listarNoticias(){
     this.noticias = new Array<Noticia>();
+
     this.noticiaServ.getNoticias().subscribe(
       (result)=>{
         var loc: Noticia = new Noticia(); 
@@ -60,10 +61,19 @@ export class NoticiaComponent implements OnInit {
         console.log(error);
       } 
     )
-
   }
 
-  //agrega noticia
+  elegirNoticia(noti: Noticia) {
+    var vnoti = new Noticia();
+    Object.assign(vnoti, noti);
+    this.noti = vnoti;
+  }
+
+  limpiarNoticia(){
+    this.noti = new Noticia();
+  }
+
+  //CRUD noticia
   altaNoticia(){
     this.noticiaServ.addNoticia(this.noti).subscribe(
       (result) => {
@@ -75,6 +85,33 @@ export class NoticiaComponent implements OnInit {
          // this._toastr.error(error, "fail");
     }
     )
+    this.listarNoticias();
+    this.noti = new Noticia();    
+  }
+
+
+  borrarNoticia(noti: Noticia){
+      this.noticiaServ.deleteNoticia(noti).subscribe(
+        (result)=>{
+          alert("La Noticia ha sido borrada de BD..");
+        },
+        (error)=>{
+          console.log(error);
+        }
+      );
+      this.listarNoticias();
+  }
+
+  
+  modificarNoticia(){
+    this.noticiaServ.updateNoticia(this.noti).subscribe(
+      (result)=>{
+        alert("La Noticia ha sido actualizada en BD..");
+      },
+      (error)=>{
+        console.log(error);
+      }
+    );
     this.noti = new Noticia();
     this.listarNoticias();
   }

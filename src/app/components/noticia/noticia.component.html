@@ -42,8 +42,8 @@
 
         <div class="card-body">
             <button type="button" class="btn btn-primary mr-3" (click)="altaNoticia()" >Agregar</button>
-            <button type="button" class="btn btn-primary align-content-center">Modificar</button>
-            <button type="button" class="btn btn-primary align-content-center">Limpiar</button>
+            <button type="button" class="btn btn-primary align-content-center" (click)="modificarNoticia()">Modificar</button>
+            <button type="button" class="btn btn-primary align-content-center" (click)="limpiarNoticia()">Limpiar</button>
         </div>
     
         <div id="registros" class="bg-warning">
@@ -54,14 +54,19 @@
                   <th scope="col">Titulo</th>
                   <th scope="col">Usuario</th>
                   <th scope="col">Vigente</th>
+                  <th scope="col">Opciones</th>
                 </tr>
               </thead>
               <tbody>
                 <tr *ngFor="let item of noticias">
                   <th scope="row">{{item.fecha}}</th>
                   <td>{{item.titulo}}</td>
-                  <td>{{item.usuario}}</td>
-                  <td>{{item.vigente}}</td>                  
+                  <td>{{item.usuario.usuario}}</td>
+                  <td>{{item.vigente}}</td>
+                  <td>
+                    <button class="btn btn-success mr-2" (click)="elegirNoticia(item)">Seleccionar</button>
+                    <button class="btn btn-danger" (click)="borrarNoticia(item)">Borrar</button>
+                  </td>                  
                 </tr>         
               </tbody>
             </table>

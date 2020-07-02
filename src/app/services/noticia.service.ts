@@ -33,6 +33,26 @@ export class NoticiaService {
     return this._http.post(this.urlBase, body , httpOptions );                                  
   }
 
-  //falta continuar
+  //Borrar noticia segun param
+  deleteNoticia(noti: Noticia):Observable<any>{
+    const httpOptions = {
+      headers: new HttpHeaders({
+      })
+    };
+    return this._http.delete( this.urlBase + noti._id, httpOptions );
+  }
+
+  //Actualizar noticia segun param
+  updateNoticia(noti: Noticia):Observable<any>{
+      const httpOptions = {
+        headers: new HttpHeaders({
+          "Content-Type": "application/json"
+        })
+      };
+      var body = JSON.stringify(noti);
+
+      return this._http.put( this.urlBase + noti._id, body, httpOptions );
+  }
+
 
 }

@@ -12,7 +12,7 @@ export class Noticia {
         this.titulo=titulo;
         this.descripcion=descripcion;
         this.fecha=fecha;
-        this.usuario=usuario;
+        this.usuario = new Usuario();
         this.vigente=vigente;
     }
 
