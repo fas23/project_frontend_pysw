@@ -5,6 +5,7 @@ import { PropietarioComponent } from './components/propietario/propietario.compo
 import {LocalComponent} from './components/local/local.component';
 import {ContratoComponent} from './components/contrato/contrato.component';
 import {NovedadComponent} from './components/novedad/novedad.component';
+import {Novedad2Component} from './components/novedad2/novedad2.component';
 import {UsuarioComponent} from './components/usuario/usuario.component';
 import {LoginComponent} from './components/login/login.component';
 import { NoticiaComponent } from './components/noticia/noticia.component';
@@ -15,6 +16,7 @@ const routes: Routes = [
   {path: 'gestionLocales', component: LocalComponent},
   {path: 'contrato', component: ContratoComponent},
   {path: 'novedad', component: NovedadComponent},
+  {path: 'novedad2', component: Novedad2Component},
   {path: 'usuario', component: UsuarioComponent},
   {path: 'login', component: LoginComponent },
   {path: 'noticia', component: NoticiaComponent},

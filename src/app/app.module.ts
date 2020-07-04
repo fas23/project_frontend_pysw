@@ -20,6 +20,7 @@ import { NovedadComponent } from './components/novedad/novedad.component';
 import {UsuarioService} from './services/usuario.service';
 import { LoginComponent } from './components/login/login.component';
 import { NoticiaComponent } from './components/noticia/noticia.component';
+import { Novedad2Component } from './components/novedad2/novedad2.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { NoticiaComponent } from './components/noticia/noticia.component';
     ContratoComponent,
     NovedadComponent,
     LoginComponent,
-    NoticiaComponent
+    NoticiaComponent,
+    Novedad2Component
   ],
   imports: [
     BrowserModule,

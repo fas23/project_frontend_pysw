@@ -24,6 +24,11 @@
         <li *ngIf="loginService.userLoggedIn && loginService.userLogged.perfil == 'administrativo'" class="nav-item">
           <a class="nav-link" [routerLink]="['/usuario']" routerLinkActive="router-link-active" >Usuario</a>
         </li>
+
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/novedad']" routerLinkActive="router-link-active" >Novedad</a>
+        </li>
+
         <div>
           <a *ngIf="!loginService.userLoggedIn" [routerLink]="['login']">(login)</a>
           <a *ngIf="loginService.userLoggedIn" [routerLink]="['login']" (click)="logout()">

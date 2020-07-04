@@ -6,9 +6,14 @@
             </div>
             <div class="form-group row">
                 <label for="texto" class="col-md-4 col-sm-12">Texto</label>
+                <!--
                 <input type="text" class="form-control col-md-8 col-sm-12" id="texto" name="texto"
                     placeholder="" required maxlength="120" [(ngModel)]="novedad.Texto"
                     #texto="ngModel" />
+                -->
+                    <textarea type="text" class="form-control col-md-8 col-sm-12" id="texto" name="texto"
+                placeholder="" required maxlength="120" [(ngModel)]="novedad.Texto"
+                #texto="ngModel"></textarea>
                 <div *ngIf="texto.invalid && (texto.dirty || texto.touched)"
                     class="alert alert-danger col-12">
                     <div *ngIf="texto.errors.required">
