@@ -52,4 +52,14 @@ export class NovedadService {
 
   }
 
+  getPropietario(email: string):Observable<any>{
+    const httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json"
+      })
+    };
+    return this._http.put(this.urlBase + email , httpOptions );    
+
+  }
+
 }

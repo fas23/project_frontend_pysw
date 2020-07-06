@@ -1,14 +1,16 @@
 import { Usuario } from './usuario';
 export class Novedad {
     id: number;
-    Usuario: Usuario;
-    Texto: string;
+    usuario: Usuario;
+    texto: string;
     estado: string;// (pendiente - procesado)
+    fecha: Date;
 
-    constructor(id?:number, Usuario?: Usuario, Texto?: string, estado?: string){
+    constructor(id?:number, usuario?: Usuario, texto?: string, estado?: string, fecha?:Date){
         this.id = id;
-        this.Usuario = Usuario;
-        this.Texto = Texto;
+        this.usuario = usuario;
+        this.texto = texto;
         this.estado = estado;
+        this.fecha = fecha;
     }
 }

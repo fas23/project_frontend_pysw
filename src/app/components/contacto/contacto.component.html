@@ -1,0 +1,83 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-3 col-sm-12 bg-secondary barra">
+            <h4>CONTACTOS</h4>
+            <hr>
+            <p>CENTRO DE ATENCION AL CLIENTE</p>
+            <P>0800-555-000</P>
+            <p>De Lunes a Viernes de 8 a 16 hs.</p>
+            <h6>Contactos Administrativos</h6>
+            <hr>
+            <p>Muñoz Cristian</p>
+            <p>Tel: 3884294171</p>
+            <p>E-Mail: cris091187965@gmail.com</p>
+            <p>Pereyra Maximo</p>
+            <p>Tel: 388-6860468</p>
+            <p>Email: pereyra.maximo@gmail.com</p>
+            <p>Sajama Fabian</p>
+            <p>Tel: 388-4108842</p>
+            <p>Email: sajama230@gmail.com</p>
+            <p>Ontiveros Fabian</p>
+            <p>Tel: 388-4152519</p>
+            <p>Email: fabianontiveros_7@hotmail.com</p>
+        </div>
+        <div class="col-md-9 col-sm-12">
+            <h4>Nosotros</h4>
+            <hr>
+            <p>Somos un grupo de estudiantes programadores de la Facultad de Ingenieria de Jujuy de la Carrera
+                de de Analista Programador Universitario.
+            </p>
+            <p>En esta pagina administramos la gestion de Alquileres de locales de nuestra galeria comercial
+                en donde encontraras informacion sobre nuestros locales comerciales disponibles y noticias
+                generales sobre nuestras situaciones.
+            </p>
+            <form class="row form-group" #formregistro="ngForm">
+                <h4 class="col-12">Contactenos</h4>
+                <label class="col-md-4 col-sm-12" for="nombre">Nombre</label>
+                <input class="col-md-8 col-sm-12 form-control" type="text" id="nombre" name="nombre"  placeholder="Ingrese sus nombres">
+                <label class="col-md-4 col-sm-12" for="apellido">Apellido</label>
+                <input class="col-md-8 col-sm-12 form-control" type="text" id="apellido" name="apellido"  placeholder="Ingrese su Apellido">
+                <label class="col-md-4 col-sm-12" for="dni">DNI</label>
+                <input class="col-md-8 col-sm-12 form-control" type="text" id="dni" name="dni"  placeholder="Ingrese numero de DNI">
+                <label class="col-md-4 col-sm-12" for="email">Email</label>
+                <input class="col-md-8 col-sm-12 form-control" type="email" id="email" name="email"  placeholder="Ingrese direccion de Email">
+                <label class="col-md-4 col-sm-12" for="telefono">Telefono</label>
+                <input class="col-md-8 col-sm-12 form-control" type="number" id="telefono" 
+                name="telefono"  placeholder="Ingrese numero de Telefono" [(ngModel)]="propietario.telefono">
+                <label class="col-md-4 col-sm-12" for="novedad">Novedad</label>
+                <textarea class="col-md-8 col-sm-12 form-control" name="novedad" id="novedad" cols="20" rows="5"
+                [(ngModel)]="novedad.texto" required></textarea>
+                <div class="col-md-4 col-sm-12"></div>
+                <div class="col-md-4 col-sm-12 mt-2">
+                    <button type="submit" class="btn btn-primary btn-block" (click)="open(content)" [disabled]="!formregistro.form.valid"><i
+                        class="fa fa-save"></i>  Agregar</button>
+                </div>
+                
+            </form>
+        </div>
+    </div>
+    <!-- <div>
+        <google-map [center]="punto.position">
+            <map-marker
+            [position]="punto.position"
+            [label]="punto.label"
+            [title]="punto.title">
+            </map-marker>
+           </google-map>
+    </div> -->
+</div>
+
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Enivar Novedad</h4>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p>{{novedad.texto}}</p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-primary"  (click)="addNovedad()" (click)="d('Cross click')">Enviar</button>
+    </div>
+  </ng-template>

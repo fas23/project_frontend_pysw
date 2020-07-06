@@ -40,6 +40,15 @@ export class UsuarioService {
         };
         return this._http.get(this.urlBase, httpOptions);
       }
+
+      getUsuario(usuario:string): Observable <any>{
+        const httpOptions = {
+          headers: new HttpHeaders({
+            
+          })
+        };
+        return this._http.get(this.urlBase + usuario, httpOptions);
+      }
     
       addUsuario(usuario: Usuario): Observable<any>{
         const httpOptions = {
