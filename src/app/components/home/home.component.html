@@ -1,1 +1,8 @@
-<p>home works!</p>
+<div class="container">
+    <div *ngFor="let noti of noticias" class="card border-secondary mb-3" style="max-width: 100rem;">
+        <div class="card-header"><h4>{{noti.titulo}}</h4></div>
+        <div class="card-body text-secondary">
+          <h5 class="card-title">{{noti.descripcion}}</h5>
+          <p class="card-text">Fecha : {{noti.fecha | date:'yyyy-MM-dd'}}</p>
+    </div>
+</div>

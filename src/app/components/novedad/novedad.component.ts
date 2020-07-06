@@ -12,32 +12,15 @@ import {ToastrService} from 'ngx-toastr';
 })
 export class NovedadComponent implements OnInit {
  
-  novedad: Novedad;
   novedades: Array<Novedad>;
   existe : boolean = false;
-  usuarios: Array<Usuario>;
 
-  constructor(private servicio: NovedadService, private _toastr: ToastrService, private usServicio: UsuarioService) {
-    this.novedad = new Novedad();
+  constructor(private servicio: NovedadService, private _toastr: ToastrService, public loginService: UsuarioService) {
     this.novedades = new Array<Novedad>();
-    this.usuarios = new Array<Usuario>();
     this.listarNovedades();
-    this.listarUsuarios();
    }
  
-  altaNovedad(){
-    this.servicio.addNovedad(this.novedad).subscribe(
-      (result) => {
-        this._toastr.success("Novedad Registrada", "Hecho");
-      }
-    ),
-    (error) => {
-      this._toastr.error(error, "fail");
-    }
-    this.novedad = new Novedad();
-    this.listarNovedades();
-  }
-
+  
   bajaNovedad(novedad: Novedad){
     this.servicio.deleteNovedad(novedad).subscribe(
       (result)=>{
@@ -50,8 +33,9 @@ export class NovedadComponent implements OnInit {
     this.listarNovedades();
   }
 
-  modificarNovedad(){
-    this.servicio.updateNovedad(this.novedad).subscribe(
+  modificarNovedad(nov : Novedad){
+    nov.estado = "Procesado";
+    this.servicio.updateNovedad(nov).subscribe(
       (result)=>{
         this._toastr.success("Novedad actualizada","Exito");
       },
@@ -59,12 +43,7 @@ export class NovedadComponent implements OnInit {
         this._toastr.error(error,"Error");
       }
     );
-    this.novedad = new Novedad();
     this.listarNovedades();
-  }
-
-  limpiar(){
-    this.novedad = new Novedad();
   }
 
   listarNovedades(){
@@ -83,32 +62,7 @@ export class NovedadComponent implements OnInit {
       }
     )
   }
-
-  listarUsuarios(){
-    this.usuarios = new Array<Usuario>();
-    this.usServicio.getUsuarios().subscribe(
-      (result)=>{
-        var us: Usuario = new Usuario();  
-        result.forEach(element => {
-          Object.assign(us, element); 
-          this.usuarios.push(us); 
-          us = new Usuario();
-          console.log(result);
-        });
-      },
-      (error)=>{
-        console.log(error);
-      } 
-    )
-  }
   
-  elegirNovedad(novedad: Novedad){
-    var nv = new Novedad();
-    Object.assign(novedad, nv);
-    this.novedad = novedad;
-    this._toastr.info("Novedad elegida","Info");
-  }
-
   ngOnInit(): void {
   }
 

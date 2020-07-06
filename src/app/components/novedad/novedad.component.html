@@ -1,82 +1,31 @@
-<div class="card">
-    <div class="card-header">
-        <form #formregistro="ngForm">
-            <div class="card-header bg-info mb-3">
-                <h2>Gestion de Novedades</h2>
+<div *ngIf="loginService.userLoggedIn">
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <div class="card-header bg-info mb-3">
+                    <h2>Control de novedades</h2>
+                </div>
             </div>
-            <div class="form-group row">
-                <label for="texto" class="col-md-4 col-sm-12">Texto</label>
-                <!--
-                <input type="text" class="form-control col-md-8 col-sm-12" id="texto" name="texto"
-                    placeholder="" required maxlength="120" [(ngModel)]="novedad.Texto"
-                    #texto="ngModel" />
-                -->
-                    <textarea type="text" class="form-control col-md-8 col-sm-12" id="texto" name="texto"
-                placeholder="" required maxlength="120" [(ngModel)]="novedad.Texto"
-                #texto="ngModel"></textarea>
-                <div *ngIf="texto.invalid && (texto.dirty || texto.touched)"
-                    class="alert alert-danger col-12">
-                    <div *ngIf="texto.errors.required">
-                        invalidao
+            <div class="card-body row">
+                <div class="card col-12 mb-2" *ngFor="let item of novedades">
+                    <div class="card-header bg-secondary">
+                        <h5 class="card-title">Novedad {{item.fecha | date:'dd-MM-yyyy'}}</h5>
                     </div>
+                    <div class="card-body">
+                        <p class="card-text">{{item.texto}}</p>
+                    </div>
+                    <div class="card-footer">
+                        <div>Propietario : {{item.usuario.usuario}}</div>
+                        <hr>
+                        <div class="badge-info" *ngIf="item.estado == 'Procesado'">Estado: {{item.estado}}</div>
+                        <div *ngIf="item.estado != 'Procesado'">Estado: {{item.estado}}</div>
+                    </div>
+                    <button class="btn btn-lg btn-primary" (click)="modificarNovedad(item)">Procesado</button>
                 </div>
+
             </div>
-            <div class="form-group row">
-                <label for="estado" class="col-md-4 col-sm-12">Estado</label>
-                <input type="text" class="form-control col-md-8 col-sm-12" id="estado" name="estado"
-                    placeholder="" required maxlength="12" [(ngModel)]="novedad.estado"
-                    #estado="ngModel" />
-                <div *ngIf="estado.invalid && (estado.dirty || estado.touched)"
-                    class="alert alert-danger col-12">
-                    
-                </div>
-            </div>
-            <div class="form-group row">
-                <label for="idusuario" class="col-md-4 col-sm-12">Usuario</label>
-                <select id="idusuario" class="form-control col-md-8 col-sm-12" 
-                       name="usuario" #usuario="ngModel"
-                       [(ngModel)]="novedad.Usuario">
-                    <option *ngFor="let user of usuarios" [ngValue]="user">{{user.usuario}}</option>
-                
-                </select>
-              </div> 
-        </form>
-    </div>
-    <div class="card-body">
-        <button type="button" class="btn btn-primary mr-3" (click)="altaNovedad()"
-            [disabled]="!formregistro.form.valid || existe">Agregar</button>
-        <button type="button" class="btn btn-primary align-content-center"
-            [disabled]="!formregistro.form.valid || !existe" (click)="modificarNovedad()">Modificar</button>
-        <button type="button" class="btn btn-primary align-content-center" (click)="limpiar()">Limpiar</button>
-    </div>
-    <div class="card-footer">
-        <table class="table table-striped" [mfData]="novedades" #mf="mfDataTable" [mfRowsOnPage]="5">
-            <thead>
-                <tr>
-                    <th scope="col">Texto</th>
-                    <th scope="col">Usuario</th>
-                    <th scope="col">Estado</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let item of mf.data">
-                    <td></td>
-                    <td>{{item.Texto}}</td>
-                    <td>{{item.Usuario.usuario}}</td>
-                    <td>{{item.estado}}</td>
-                    <td>
-                        <button class="btn btn-primary btn" (click)="elegirNovedad(item)">Seleccinar</button>
-                        <button class="btn btn-primary btn" (click)="bajaNovedad(item)">Borrar</button>
-                    </td>
-                </tr>
-            </tbody>
-            <tfoot>
-                <tr>
-                    <td colspan="4">
-                        <mfBootstrapPaginator [rowsOnPageSet]="[5,10,20]"></mfBootstrapPaginator>
-                    </td>
-                </tr>
-            </tfoot>
-        </table>
+
+        </div>
+
     </div>
 </div>

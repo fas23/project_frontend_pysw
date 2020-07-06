@@ -13,7 +13,7 @@
                         <h5 class="card-title">Local</h5>
                     </div>
                     <div class="card-body">
-                        <img class="img card-img" src="{{item.imagen}}" class="card-img-top" alt="...">
+                        <img class="img" src="{{item.imagen}}" alt="...">
                         <p class="card-text">Descripcion: {{item.descripcion}}</p>
                     </div>
                     <ul class="list-group list-group-flush">
@@ -88,7 +88,7 @@
                             <button type="button" class="btn btn-primary mr-3" (click)="saveContrato()"
                             [disabled]="!formregistro.form.valid || existe">Agregar</button>
                         <button type="button" class="btn btn-primary align-content-center"
-                            [disabled]="!formregistro.form.valid || !existe" (click)="modificarContrato()">Modificar</button>
+                            [disabled]="!formregistro.form.valid || !existe || cerrado" (click)="modificarContrato()">Modificar</button>
                         <button type="button" class="btn btn-primary align-content-center" (click)="limpiar()">Limpiar</button>
                         </div>
                     </div>
@@ -151,5 +151,4 @@
             </div>
         </div>
     </div>
-    
 </div>

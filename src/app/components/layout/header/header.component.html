@@ -1,63 +1,49 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">Navbar</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-  
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-3">
+  <a class="navbar-brand" [routerLink]="['/home']" routerLinkActive="router-link-active">Locales</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div class="container-fluid">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-        </li>
-        <li *ngIf="loginService.userLoggedIn && loginService.userLogged.perfil == 'administrativo'" class="nav-item">
-          <a class="nav-link" [routerLink]="['/propietario']" routerLinkActive="router-link-active" >Propietario</a>
-        </li>
-        <li *ngIf="loginService.userLoggedIn &&  loginService.userLogged.perfil == 'administrativo'" class="nav-item">
-          <a class="nav-link" [routerLink]="['/gestionLocales']" routerLinkActive="router-link-active" >ABM Locales</a>
-        </li>
-        <li *ngIf="loginService.userLoggedIn &&  loginService.userLogged.perfil == 'administrativo'" class="nav-item">
-          <a class="nav-link" [routerLink]="['/contrato']" routerLinkActive="router-link-active" >Contrato</a>
-        </li>
-        <li *ngIf="loginService.userLoggedIn && loginService.userLogged.perfil == 'administrativo'" class="nav-item">
-          <a class="nav-link" [routerLink]="['/novedad']" routerLinkActive="router-link-active" >Novedad</a>
-        </li>
-        <li *ngIf="loginService.userLoggedIn && loginService.userLogged.perfil == 'administrativo'" class="nav-item">
-          <a class="nav-link" [routerLink]="['/usuario']" routerLinkActive="router-link-active" >Usuario</a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/novedad']" routerLinkActive="router-link-active" >Novedad</a>
-        </li>
-
-        <div>
-          <a *ngIf="!loginService.userLoggedIn" [routerLink]="['login']">(login)</a>
-          <a *ngIf="loginService.userLoggedIn" [routerLink]="['login']" (click)="logout()">
-          {{loginService.userLogged.usuario}}   (logout)
-          </a>
-          </div>
-
-        <li class="nav-item">
-            <a class="nav-link" [routerLink]="['/noticia']" routerLinkActive="router-link-active" >Noticia</a>
-         </li>  
-
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Dropdown
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Something else here</a>
-          </div>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-        </li>
-      </ul>
-      <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-      </form>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/home']" routerLinkActive="router-link-active" >Home</a>
+      </li>
+      <li *ngIf="loginService.userLoggedIn" class="nav-item">
+        <a *ngIf="loginService.userLogged.perfil == 'administrativo' || loginService.userLogged.perfil == 'administrador'" 
+        class="nav-link" [routerLink]="['/propietario']" [routerLink]="['/propietario']" routerLinkActive="router-link-active" >Propietario</a>
+      </li>
+      <li *ngIf="loginService.userLoggedIn" class="nav-item">
+        <a *ngIf="loginService.userLogged.perfil == 'administrativo' || loginService.userLogged.perfil == 'administrador'" 
+        class="nav-link" [routerLink]="['/propietario']" [routerLink]="['/local']" routerLinkActive="router-link-active" >ABM Locales</a>
+      </li>
+      <li *ngIf="loginService.userLoggedIn" class="nav-item">
+        <a *ngIf="loginService.userLogged.perfil == 'administrativo' || loginService.userLogged.perfil == 'administrador'" 
+        class="nav-link" [routerLink]="['/propietario']" [routerLink]="['/contrato']" routerLinkActive="router-link-active" >Contrato</a>
+      </li>
+      <li *ngIf="loginService.userLoggedIn" class="nav-item">
+        <a *ngIf="loginService.userLogged.perfil == 'administrativo' || loginService.userLogged.perfil == 'administrador'" 
+        class="nav-link" [routerLink]="['/propietario']" [routerLink]="['/novedad']" routerLinkActive="router-link-active" >Novedad</a>
+      </li>
+      <li *ngIf="loginService.userLoggedIn" class="nav-item">
+        <a *ngIf="loginService.userLogged.perfil == 'administrador'" 
+        class="nav-link" [routerLink]="['/propietario']" [routerLink]="['/usuario']" routerLinkActive="router-link-active" >Usuario</a>
+      </li>
+      <li *ngIf="loginService.userLoggedIn" class="nav-item">
+        <a *ngIf="loginService.userLogged.perfil == 'administrativo' || loginService.userLogged.perfil == 'administrador'"
+        class="nav-link" [routerLink]="['/propietario']" class="nav-link" [routerLink]="['/noticia']" routerLinkActive="router-link-active" >Noticia</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/contacto']" routerLinkActive="router-link-active" >Contactos</a>
+      </li>
+    </ul>
     </div>
-  </nav>
+    <form class="form-inline my-2 my-lg-0">
+      <a *ngIf="!loginService.userLoggedIn" [routerLink]="['login']"> (login) </a>
+        <a *ngIf="loginService.userLoggedIn" [routerLink]="['login']" (click)="logout()">
+          {{loginService.userLogged.usuario}}  (logout)
+        </a>
+    </form>
+  </div>
+</nav>
