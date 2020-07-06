@@ -8,6 +8,7 @@ import {NgxDataTableModule} from 'angular-9-datatable';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import {HttpClientModule} from '@angular/common/http';
+import { FacebookModule } from 'ngx-fb';
 
 import { HeaderComponent } from './components/layout/header/header.component';
 import { FooterComponent } from './components/layout/footer/footer.component';
@@ -44,6 +45,7 @@ import { Novedad2Component } from './components/novedad2/novedad2.component';
     NgxDataTableModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    FacebookModule.forRoot(),
     ToastrModule.forRoot({
       closeButton:true,
       timeOut:3000,
