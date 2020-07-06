@@ -6,9 +6,14 @@
             </div>
             <div class="form-group row">
                 <label for="texto" class="col-md-4 col-sm-12">Texto</label>
+                <!--
                 <input type="text" class="form-control col-md-8 col-sm-12" id="texto" name="texto"
-                    placeholder="" required maxlength="120" [(ngModel)]="Novedad.Texto"
+                    placeholder="" required maxlength="120" [(ngModel)]="novedad.Texto"
                     #texto="ngModel" />
+                -->
+                    <textarea type="text" class="form-control col-md-8 col-sm-12" id="texto" name="texto"
+                placeholder="" required maxlength="120" [(ngModel)]="novedad.Texto"
+                #texto="ngModel"></textarea>
                 <div *ngIf="texto.invalid && (texto.dirty || texto.touched)"
                     class="alert alert-danger col-12">
                     <div *ngIf="texto.errors.required">
@@ -23,11 +28,18 @@
                     #estado="ngModel" />
                 <div *ngIf="estado.invalid && (estado.dirty || estado.touched)"
                     class="alert alert-danger col-12">
-                    <div *ngIf="passworderrors.required">
-                        invalido
-                    </div>
+                    
                 </div>
             </div>
+            <div class="form-group row">
+                <label for="idusuario" class="col-md-4 col-sm-12">Usuario</label>
+                <select id="idusuario" class="form-control col-md-8 col-sm-12" 
+                       name="usuario" #usuario="ngModel"
+                       [(ngModel)]="novedad.Usuario">
+                    <option *ngFor="let user of usuarios" [ngValue]="user">{{user.usuario}}</option>
+                
+                </select>
+              </div> 
         </form>
     </div>
     <div class="card-body">
@@ -41,8 +53,8 @@
         <table class="table table-striped" [mfData]="novedades" #mf="mfDataTable" [mfRowsOnPage]="5">
             <thead>
                 <tr>
-                    <th scope="col">#</th>
                     <th scope="col">Texto</th>
+                    <th scope="col">Usuario</th>
                     <th scope="col">Estado</th>
                 </tr>
             </thead>
@@ -50,6 +62,7 @@
                 <tr *ngFor="let item of mf.data">
                     <td></td>
                     <td>{{item.Texto}}</td>
+                    <td>{{item.Usuario.usuario}}</td>
                     <td>{{item.estado}}</td>
                     <td>
                         <button class="btn btn-primary btn" (click)="elegirNovedad(item)">Seleccinar</button>

@@ -3,8 +3,12 @@ import { Propietario } from '../../models/propietario';
 import { PropietarioService } from '../../services/propietario.service';
 import { NgForm } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+<<<<<<< HEAD
 import { FacebookService, InitParams, LoginResponse } from 'ngx-fb';
 import { ApiMethod } from 'ngx-fb/dist/esm/providers/facebook';
+=======
+import {UsuarioService} from './../../services/usuario.service';
+>>>>>>> master
 
 @Component({
   selector: 'app-propietario',
@@ -18,9 +22,13 @@ export class PropietarioComponent implements OnInit {
   //prueba mensaje posteo facebook
   mensaje: string = "";
 
+<<<<<<< HEAD
   constructor(private propietarioService: PropietarioService, private _toastr: ToastrService,
     private fb: FacebookService) {
     this.iniciarFb();
+=======
+  constructor(private propietarioService: PropietarioService, private _toastr: ToastrService, public loginService:UsuarioService) {
+>>>>>>> master
     this.propietario = new Propietario();
     this.propietarios = new Array<Propietario>();
     this.refrescarPropietarios();

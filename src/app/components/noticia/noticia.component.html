@@ -1,0 +1,79 @@
+<div class="card">
+    <div id="noticia" class="card-header">
+        <form #formregistro="ngForm">
+            <div class="card-header bg-info mb-3">
+                <h2>Gestion de NOTICIAS</h2>
+            </div>
+            <div class="form-group row">
+                <label for="titulo" class="col-md-4 col-sm-12">Titulo</label>
+                <input type="text" class="form-control col-md-8 col-sm-12" id="titulo" name="titulo"
+                    placeholder="ingrese Titulo de Noticia" required maxlength="40" [(ngModel)]="noti.titulo" />         
+            </div>
+           
+            <div class="form-group row">
+                <label for="descripcion" class="col-md-4 col-sm-12">Descripcion</label>
+                <textarea class="form-control col-md-8 col-sm-12" rows="6" name="txtTexto" [(ngModel)]="noti.descripcion" >  
+                </textarea>
+                <label>Longitud de texto escrito: </label>             
+            </div>
+            
+
+            <div class="form-group row">
+                <label for="fecha" class="col-md-4 col-sm-12">Fecha</label>
+                <input type="date" class="form-control col-md-8 col-sm-12" id="fecha" name="fecha" [(ngModel)]="noti.fecha" />
+            </div>
+            <div class="form-group row">
+                <label for="vigente" class="col-md-6 col-sm-12">Se encuentra Vigente</label>
+                <input type="checkbox" class="form-control col-md-6 col-sm-12" id="vigente" name="vigente" [(ngModel)]="noti.vigente">
+            </div>
+
+            <div class="form-group row">
+              <label for="idusuario" class="col-md-4 col-sm-12">Usuario</label>
+              <select id="idusuario" class="form-control col-md-8 col-sm-12" 
+                     name="usuario" #usuario="ngModel"
+                     [(ngModel)]="noti.usuario">
+                  <option *ngFor="let user of usuarios" [ngValue]="user">{{user.usuario}}</option>
+              
+              </select>
+            </div> 
+
+        </form>
+
+
+        <div class="card-body">
+            <button type="button" class="btn btn-primary mr-3" (click)="altaNoticia()" >Agregar</button>
+            <button type="button" class="btn btn-primary align-content-center" (click)="modificarNoticia()">Modificar</button>
+            <button type="button" class="btn btn-primary align-content-center" (click)="limpiarNoticia()">Limpiar</button>
+        </div>
+    
+        <div id="registros" class="bg-warning">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Fecha</th>
+                  <th scope="col">Titulo</th>
+                  <th scope="col">Usuario</th>
+                  <th scope="col">Vigente</th>
+                  <th scope="col">Opciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of noticias">
+                  <th scope="row">{{item.fecha}}</th>
+                  <td>{{item.titulo}}</td>
+                  <td>{{item.usuario.usuario}}</td>
+                  <td>{{item.vigente}}</td>
+                  <td>
+                    <button class="btn btn-success mr-2" (click)="elegirNoticia(item)">Seleccionar</button>
+                    <button class="btn btn-danger" (click)="borrarNoticia(item)">Borrar</button>
+                  </td>                  
+                </tr>         
+              </tbody>
+            </table>
+          </div>
+        
+
+    </div>   
+    
+
+</div>

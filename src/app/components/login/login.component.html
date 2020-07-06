@@ -1,0 +1,22 @@
+<div class="container">
+    <div class="col-md-6 col-md-offset-3 login-page">
+        <div class="pt-2">
+            <h2 class="text-center alert alert-primary">Login</h2>
+            <form name="form">
+            <div class="form-group mt-1">
+            <label for="username">Username</label>
+            <input type="text" class="formcontrol" name="username" [(ngModel)]="usuario.usuario" />
+            </div>
+            <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="formcontrol" name="password" [(ngModel)]="usuario.password" />
+            </div>
+            <div class="form-group">
+            <button class="btn btn-primary" (click)="login()">Login</button>
+            </div>
+            <div class="alert-danger">{{msglogin}}</div>
+            </form>
+        </div>
+       </div>
+    
+</div>

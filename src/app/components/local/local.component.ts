@@ -3,6 +3,7 @@ import {Local} from './../../models/local';
 import {LocalService} from './../../services/local.service';
 import {ToastrService} from 'ngx-toastr';
 import { NgForm } from '@angular/forms';
+import {UsuarioService} from './../../services/usuario.service';
 
 @Component({
   selector: 'app-local',
@@ -16,7 +17,7 @@ export class LocalComponent implements OnInit {
   local : Local;
   locales : Array<Local>;
 
-  constructor(private localServ:LocalService, private _toastr:ToastrService) { 
+  constructor(private localServ:LocalService, private _toastr:ToastrService, public loginService:UsuarioService) { 
     this.local = new Local();
     this.locales = new Array<Local>();
     this.listarLocales();

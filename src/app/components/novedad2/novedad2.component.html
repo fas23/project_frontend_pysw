@@ -1,0 +1,24 @@
+<table class="table table-striped" [mfData]="novedades" #mf="mfDataTable" [mfRowsOnPage]="5">
+    <thead>
+        <tr>
+            <th scope="col">Texto</th>
+            <th scope="col">Usuario</th>
+            <th scope="col">Estado</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of mf.data">
+            <td></td>
+            <td>{{item.Texto}}</td>
+            <td>{{item.Usuario.usuario}}</td>
+            <td>{{item.estado}}</td>
+        </tr>
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="4">
+                <mfBootstrapPaginator [rowsOnPageSet]="[5,10,20]"></mfBootstrapPaginator>
+            </td>
+        </tr>
+    </tfoot>
+</table>
