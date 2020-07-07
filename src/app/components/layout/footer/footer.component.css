@@ -1,0 +1,33 @@
+.footer {
+    background: #262626;
+    color: white;
+}
+
+.links ul {
+    list-style-type: none;
+}
+
+.links ul li a:hover {
+    color: white;
+    transition: color .2s;
+    text-decoration: none;
+    color: #4180CB;
+}
+
+.about-company i {
+    font-size: 25px;
+}
+
+.about-company a:hover {
+    color: white;
+    transition: color .2s;
+    color: #4180CB
+}
+
+.location i {
+    font-size: 18px;
+}
+
+.copyright p {
+    border-top: 1px solid rgba(255, 255, 255, .1);
+}
