@@ -1,3 +1,4 @@
+<div *ngIf="loginService.userLoggedIn && loginService.userLoggedAdtt" >    
 <div class="card">
   <div id="noticia" class="card-header">
     <form #formNoticia="ngForm">
@@ -46,10 +47,11 @@
         <input type="checkbox" class="form-control col-md-6 col-sm-12" id="vigente" name="vigente"
             [(ngModel)]="noti.vigente">
       </div>
+      
 
       <div class="form-group row">
-        <label for="idusuario" class="col-md-4 col-sm-12">Usuario  *</label>
-        <select id="idusuario" class="form-control col-md-8 col-sm-12" name="usuario" #usuario="ngModel" required
+        <label for="idusuario" class="col-md-4 col-sm-12">Usuario Logeado :  {{loginService.userLogged.usuario}} </label>
+        <select id="idusuario" class="form-control col-md-8 col-sm-12" name="usuario" #usuario="ngModel"
           [(ngModel)]="noti.usuario">
           <option *ngFor="let user of usuarios" [ngValue]="user">{{user.usuario}}</option>        
         </select>
@@ -96,5 +98,7 @@
 
   </div>
 
+
+</div>
 
 </div>

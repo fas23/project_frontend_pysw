@@ -19,7 +19,7 @@ export class NoticiaComponent implements OnInit {
   usuarios : Array<Usuario>;
   modifica : boolean = false;  
 
-  constructor(private noticiaServ:NoticiaService, private usuarioServ: UsuarioService, private _toastr: ToastrService) { 
+  constructor(private noticiaServ:NoticiaService, private usuarioServ: UsuarioService, private _toastr: ToastrService, public loginService:UsuarioService) { 
       this.noti = new Noticia();
       this.noticias = new Array<Noticia>();      
       this.listarNoticias();

@@ -9,6 +9,7 @@ import { Usuario } from '../models/usuario';
 export class UsuarioService {
 
   userLoggedIn: boolean = false;
+  userLoggedAdtt: boolean = false;  // testing
   userLogged: Usuario;
   urlBase: string = "http://localhost:3000/api/usuario/";
 
