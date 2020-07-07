@@ -4,10 +4,8 @@ import { PropietarioService } from '../../services/propietario.service';
 import { NgForm } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import {UsuarioService} from './../../services/usuario.service';
-
-//api Facebook
-import { FacebookService, InitParams, LoginResponse } from 'ngx-fb';
-import { ApiMethod } from 'ngx-fb/dist/esm/providers/facebook';
+//imprimir reportes 
+import * as printJS from 'print-js';
 
 @Component({
   selector: 'app-propietario',
@@ -18,14 +16,11 @@ export class PropietarioComponent implements OnInit {
 
   propietario: Propietario;
   propietarios: Array<Propietario>;
-  //prueba mensaje posteo facebook
-  mensaje: string = "";
+  propietarioJSON: JSON;
 
-  constructor(private propietarioService: PropietarioService, private _toastr: ToastrService, public loginService:UsuarioService,
-    private fb: FacebookService
+  constructor(private propietarioService: PropietarioService, private _toastr: ToastrService, public loginService:UsuarioService
     ) {
-      //iniciar la variables Api
-      this.iniciarFb();
+      
     this.propietario = new Propietario();
     this.propietarios = new Array<Propietario>();
     this.refrescarPropietarios();
@@ -34,30 +29,12 @@ export class PropietarioComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  //implementacion ApiFacebook
-  postFb() {
-    var apiMethod: ApiMethod = "post";
-    this.fb.api('/111204877317218/feed', apiMethod,
-      {
-        "message": this.mensaje,
-        "access_token": "EAAMppWZC1UQ0BACbtQpfG3ZAEJO0vxgeHBfv5wHii07UYPhh2pcP4ZAkh3mStgWsMPgJM9sLe78M4kWVk4S1ZAZAKghYKwgECesCoymryBocb9zQkkJWHkGTexOUNwQIE3RmN7kHb9qkWep0H3Rii0zSudtW34NncRh1TtZAfZAIT34E0KnpTeLBOBQco8vlWl1DrxlNevbkHhrXZAzazPEm"
-      });
-  }
+  
 
-  iniciarFb() {
-    let initParams: InitParams =
-    {
-      //id de la app en developers
-      appId: '890215454822669',
-      autoLogAppEvents: true,
-      xfbml: true,
-      version: 'v7.0'
-    };
-    this.fb.init(initParams);
-  }
-
-//fin implementacion ApiFacebook
-
+//imprimir reportes 
+print(){
+  printJS({printable: this.propietarioJSON, properties: ['nombres', 'apellido', 'dni', 'telefono','email'], type: 'json'})
+}
 //obtener todos los propietarios
 refrescarPropietarios() {
   this.propietarios = new Array<Propietario>();
@@ -68,6 +45,7 @@ refrescarPropietarios() {
         Object.assign(prop, element);
         this.propietarios.push(prop);
         prop = new Propietario();
+        this.propietarioJSON = result;
       });
       console.log(this.propietarios);
     },

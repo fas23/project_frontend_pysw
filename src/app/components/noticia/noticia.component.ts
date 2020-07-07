@@ -5,6 +5,12 @@ import { Usuario } from 'src/app/models/usuario';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { ToastrService } from 'ngx-toastr';
 import { NgForm } from '@angular/forms';
+//imprimir reportes 
+import * as printJS from 'print-js';
+
+//api Facebook
+import { FacebookService, InitParams, LoginResponse } from 'ngx-fb';
+import { ApiMethod } from 'ngx-fb/dist/esm/providers/facebook';
 
 @Component({
   selector: 'app-noticia',
@@ -18,13 +24,19 @@ export class NoticiaComponent implements OnInit {
   noticias : Array<Noticia>; 
   usuarios : Array<Usuario>;
   modifica : boolean = false;  
+  noticiaJSON: JSON;
+  //prueba mensaje posteo facebook
+  mensaje: string = "";
 
-  constructor(private noticiaServ:NoticiaService, private usuarioServ: UsuarioService, private _toastr: ToastrService, public loginService:UsuarioService) { 
+  constructor(private noticiaServ:NoticiaService, private usuarioServ: UsuarioService, private _toastr: ToastrService,
+    private fb: FacebookService, public loginService: UsuarioService) { 
       this.noti = new Noticia();
       this.noticias = new Array<Noticia>();      
       this.listarNoticias();
       this.listarUsuarios();
       this.noti.vigente= false;
+      //iniciar la variables Api
+      this.iniciarFb();
   }
 
   
@@ -40,6 +52,7 @@ export class NoticiaComponent implements OnInit {
           this.noticias.push(loc); 
           loc = new Noticia();
           console.log(result);
+          this.noticiaJSON = result;
         });
       },
       (error)=>{
@@ -64,6 +77,11 @@ export class NoticiaComponent implements OnInit {
         console.log(error);
       } 
     )
+  }
+
+  print(){
+    printJS({printable: this.noticiaJSON, properties: ['fecha', 'titulo', 'descripcion', 'usuario.usuario'], type: 'json'})
+
   }
 
   elegirNoticia(noti: Noticia) {
@@ -121,6 +139,29 @@ export class NoticiaComponent implements OnInit {
   }
 
 
+  //implementacion ApiFacebook
+  postFb() {
+    var apiMethod: ApiMethod = "post";
+    this.fb.api('/111204877317218/feed', apiMethod,
+      {
+        "message": this.mensaje,
+        "access_token": "EAAMppWZC1UQ0BACbtQpfG3ZAEJO0vxgeHBfv5wHii07UYPhh2pcP4ZAkh3mStgWsMPgJM9sLe78M4kWVk4S1ZAZAKghYKwgECesCoymryBocb9zQkkJWHkGTexOUNwQIE3RmN7kHb9qkWep0H3Rii0zSudtW34NncRh1TtZAfZAIT34E0KnpTeLBOBQco8vlWl1DrxlNevbkHhrXZAzazPEm"
+      });
+  }
+
+  iniciarFb() {
+    let initParams: InitParams =
+    {
+      //id de la app en developers
+      appId: '890215454822669',
+      autoLogAppEvents: true,
+      xfbml: true,
+      version: 'v7.0'
+    };
+    this.fb.init(initParams);
+  }
+
+//fin implementacion ApiFacebook
 
   ngOnInit(): void {
   }
