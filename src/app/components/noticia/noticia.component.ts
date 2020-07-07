@@ -3,6 +3,8 @@ import { Noticia } from 'src/app/models/noticia';
 import { NoticiaService } from 'src/app/services/noticia.service';
 import { Usuario } from 'src/app/models/usuario';
 import { UsuarioService } from 'src/app/services/usuario.service';
+import { ToastrService } from 'ngx-toastr';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-noticia',
@@ -15,8 +17,9 @@ export class NoticiaComponent implements OnInit {
   noti : Noticia;
   noticias : Array<Noticia>; 
   usuarios : Array<Usuario>;
+  modifica : boolean = false;  
 
-  constructor(private noticiaServ:NoticiaService, private usuarioServ: UsuarioService) { 
+  constructor(private noticiaServ:NoticiaService, private usuarioServ: UsuarioService, private _toastr: ToastrService) { 
       this.noti = new Noticia();
       this.noticias = new Array<Noticia>();      
       this.listarNoticias();
@@ -64,6 +67,7 @@ export class NoticiaComponent implements OnInit {
   }
 
   elegirNoticia(noti: Noticia) {
+    this.modifica = true;
     var vnoti = new Noticia();
     Object.assign(vnoti, noti);
     this.noti = vnoti;
@@ -73,19 +77,18 @@ export class NoticiaComponent implements OnInit {
     this.noti = new Noticia();
   }
 
-  //CRUD noticia
+  //CRUD noticia 
   altaNoticia(){
     this.noticiaServ.addNoticia(this.noti).subscribe(
       (result) => {
-        alert("Noticia guardada en BD..");
-        //this._toastr.success("Noticia Registrada", "Hecho");
+        this._toastr.success("Noticia Registrada", "Exito");
+        this.listarNoticias();
       },    
       (error) => {
-         console.log(error);
-         // this._toastr.error(error, "fail");
+         this._toastr.error(error, "fail");
     }
     )
-    this.listarNoticias();
+
     this.noti = new Noticia();    
   }
 
@@ -93,27 +96,28 @@ export class NoticiaComponent implements OnInit {
   borrarNoticia(noti: Noticia){
       this.noticiaServ.deleteNoticia(noti).subscribe(
         (result)=>{
-          alert("La Noticia ha sido borrada de BD..");
+          this._toastr.success("Noticia ha sido borrada", "Exito");
+          this.listarNoticias();
         },
         (error)=>{
-          console.log(error);
+          this._toastr.error(error, "fail");
         }
-      );
-      this.listarNoticias();
+      )      
   }
 
   
   modificarNoticia(){
     this.noticiaServ.updateNoticia(this.noti).subscribe(
       (result)=>{
-        alert("La Noticia ha sido actualizada en BD..");
+        this._toastr.success("Noticia ha sido actualizada", "Exito");
+        this.listarNoticias();
       },
       (error)=>{
-        console.log(error);
+        this._toastr.error(error, "fail");
       }
     );
     this.noti = new Noticia();
-    this.listarNoticias();
+    
   }
 
 
