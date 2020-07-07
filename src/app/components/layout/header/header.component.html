@@ -12,27 +12,27 @@
       </li>
       <li *ngIf="loginService.userLoggedIn" class="nav-item">
         <a *ngIf="loginService.userLogged.perfil == 'administrativo' || loginService.userLogged.perfil == 'administrador'" 
-        class="nav-link" [routerLink]="['/propietario']" [routerLink]="['/propietario']" routerLinkActive="router-link-active" >Propietario</a>
+        class="nav-link" [routerLink]="['/propietario']" routerLinkActive="router-link-active" >Propietario</a>
       </li>
       <li *ngIf="loginService.userLoggedIn" class="nav-item">
         <a *ngIf="loginService.userLogged.perfil == 'administrativo' || loginService.userLogged.perfil == 'administrador'" 
-        class="nav-link" [routerLink]="['/propietario']" [routerLink]="['/local']" routerLinkActive="router-link-active" >ABM Locales</a>
+        class="nav-link" [routerLink]="['/local']" routerLinkActive="router-link-active" >ABM Locales</a>
       </li>
       <li *ngIf="loginService.userLoggedIn" class="nav-item">
         <a *ngIf="loginService.userLogged.perfil == 'administrativo' || loginService.userLogged.perfil == 'administrador'" 
-        class="nav-link" [routerLink]="['/propietario']" [routerLink]="['/contrato']" routerLinkActive="router-link-active" >Contrato</a>
+        class="nav-link" [routerLink]="['/contrato']" routerLinkActive="router-link-active" >Contrato</a>
       </li>
       <li *ngIf="loginService.userLoggedIn" class="nav-item">
         <a *ngIf="loginService.userLogged.perfil == 'administrativo' || loginService.userLogged.perfil == 'administrador'" 
-        class="nav-link" [routerLink]="['/propietario']" [routerLink]="['/novedad']" routerLinkActive="router-link-active" >Novedad</a>
+        class="nav-link" [routerLink]="['/novedad']" routerLinkActive="router-link-active" >Novedad</a>
       </li>
       <li *ngIf="loginService.userLoggedIn" class="nav-item">
         <a *ngIf="loginService.userLogged.perfil == 'administrador'" 
-        class="nav-link" [routerLink]="['/propietario']" [routerLink]="['/usuario']" routerLinkActive="router-link-active" >Usuario</a>
+        class="nav-link" [routerLink]="['/usuario']" routerLinkActive="router-link-active" >Usuario</a>
       </li>
       <li *ngIf="loginService.userLoggedIn" class="nav-item">
         <a *ngIf="loginService.userLogged.perfil == 'administrativo' || loginService.userLogged.perfil == 'administrador'"
-        class="nav-link" [routerLink]="['/propietario']" class="nav-link" [routerLink]="['/noticia']" routerLinkActive="router-link-active" >Noticia</a>
+        class="nav-link" [routerLink]="['/noticia']" routerLinkActive="router-link-active" >Noticia</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" [routerLink]="['/contacto']" routerLinkActive="router-link-active" >Contactos</a>

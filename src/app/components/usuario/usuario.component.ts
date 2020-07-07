@@ -84,9 +84,9 @@ export class UsuarioComponent implements OnInit {
   
   elegirUsuario(usuario: Usuario){
     this.existe = true;
-    var us = new Usuario();
-    Object.assign(usuario, us);
-    this.usuario = usuario;
+    var usu = new Usuario();
+    Object.assign(usu, usuario);
+    this.usuario = usu;
     this._toastr.info("Usuario elegido","Info");
   }
 

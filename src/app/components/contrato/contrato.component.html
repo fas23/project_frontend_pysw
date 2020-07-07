@@ -21,8 +21,9 @@
                         <li class="list-group-item">Costo Mensual: {{item.costomes | currency: 'USD'}}, mas la mitad de un mes de Deposito</li>
                     </ul>
                     <div class="card-body row">
-                        <button class="btn btn-dark" [disabled]="item.alquilado" (click)="agregarLocal(item)">Agregar</button>
-                        <button class="btn btn-dark" [disabled]="!item.alquilado" (click)="quitarLocal(item)">Quitar</button>
+                        <button class="btn btn-dark mr-3" [disabled]="item.alquilado" (click)="agregarLocal(item)"><i
+                            class="fa fa-save"></i> Agregar</button>
+                        <button class="btn btn-dark" [disabled]="!item.alquilado" (click)="quitarLocal(item)"><i class="fa fa-trash"></i> Quitar</button>
                         <div *ngIf="item.alquilado" class="alert alert-info col-12">Local agregado</div>
                     </div>
                 </div>
@@ -44,11 +45,11 @@
                              <table class="table table-sm">
                                 <thead>
                                     <tr>
-                                        <th scope="col">locales de contrato</th>
                                         <th>Superficie</th>
                                         <th>Imagen</th>
                                         <th>Costo Mensual</th>
                                         <th>Descripcion</th>
+                                        <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -57,7 +58,7 @@
                                         <td><img class="imgTabla" src="{{item.imagen}}"></td>
                                         <td>{{item.costomes}}</td>
                                         <td>{{item.descripcion}}</td>
-                                        <td><button class="btn btn-info" [disabled]="cerrado" (click)="quitarLocal(item)">Quitar</button></td>
+                                        <td><button class="btn btn-danger" [disabled]="cerrado" (click)="quitarLocal(item)"><i class="fa fa-trash"></i> Quitar</button></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -86,10 +87,10 @@
                         </div>
                         <div class="col-12">
                             <button type="button" class="btn btn-primary mr-3" (click)="saveContrato()"
-                            [disabled]="!formregistro.form.valid || existe">Agregar</button>
-                        <button type="button" class="btn btn-primary align-content-center"
-                            [disabled]="!formregistro.form.valid || !existe || cerrado" (click)="modificarContrato()">Modificar</button>
-                        <button type="button" class="btn btn-primary align-content-center" (click)="limpiar()">Limpiar</button>
+                            [disabled]="!formregistro.form.valid || existe"><i class="fa fa-save"></i> Agregar</button>
+                        <button type="button" class="btn btn-primary align-content-center mr-3"
+                            [disabled]="!formregistro.form.valid || !existe || cerrado" (click)="modificarContrato()"><i class="far fa-edit"></i> Modificar</button>
+                        <button type="button" class="btn btn-primary align-content-center" (click)="limpiar()"><i class="fa fa-trash"></i> Limpiar</button>
                         </div>
                     </div>
                 </div>
@@ -133,9 +134,9 @@
                                 <td>{{item.cerrado}}</td>
                                 <td>{{item.costoTotalAlq | currency: 'USD'}}</td>
                                 <td>
-                                    <button class="btn btn-primary btn" (click)="elegirContrato(item)">Seleccinar</button>
-                                    <button class="btn btn-primary btn" [disabled]="item.cerrado"  (click)="cerrarContrato(item)">Cerrar Contrato</button>
-                                    <button class="btn btn-primary btn" (click)="borrarContrato(item)">Borrar</button>
+                                    <button class="btn btn-success mr-3" (click)="elegirContrato(item)"><i class="far fa-hand-point-up"></i> Seleccinar</button>
+                                    <button class="btn btn-primary mr-3" [disabled]="item.cerrado"  (click)="cerrarContrato(item)"><i class="fas fa-file-contract"></i> Cerrar Contrato</button>
+                                    <button class="btn btn-danger" (click)="borrarContrato(item)"><i class="fa fa-trash"></i> Borrar</button>
                                 </td>
                             </tr>
                         </tbody>

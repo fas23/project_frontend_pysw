@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit {
 
    listarNoticias(){
     this.noticias = new Array<Noticia>();
-    this.servicio.getNoticias().subscribe(
+    this.servicio.getNoticiasVigen().subscribe(
       (result)=>{
         var loc: Noticia = new Noticia(); 
         result.forEach(element => {

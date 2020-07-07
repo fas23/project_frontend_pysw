@@ -21,6 +21,14 @@ export class NoticiaService {
     return this._http.get( this.urlBase , httpOptions );
   }
 
+  getNoticiasVigen():Observable<any>{
+    const httpOptions = {
+      headers: new HttpHeaders({
+      })
+    };
+    return this._http.get( this.urlBase+"vigentes/" , httpOptions );
+  }
+
   //agregar una noticia nueva
   addNoticia(noti: Noticia):Observable<any>{
     const httpOptions = {

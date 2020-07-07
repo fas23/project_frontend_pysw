@@ -57,10 +57,11 @@
             </div>
             <div class="card-body">
                 <button type="button" class="btn btn-primary mr-3" (click)="saveLocal()"
-                    [disabled]="!formregistro.form.valid || existe">Agregar</button>
-                <button type="button" class="btn btn-primary align-content-center"
-                    [disabled]="!formregistro.form.valid || !existe" (click)="modificarLocal()">Modificar</button>
-                <button type="button" class="btn btn-primary align-content-center" (click)="limpiar()">Limpiar</button>
+                    [disabled]="!formregistro.form.valid || existe"><i
+                    class="fa fa-save"></i> Agregar</button>
+                <button type="button" class="btn btn-primary mr-3 align-content-center"
+                    [disabled]="!formregistro.form.valid || !existe" (click)="modificarLocal()"><i class="far fa-edit"></i> Modificar</button>
+                <button type="button" class="btn btn-primary align-content-center" (click)="limpiar()"><i class="fa fa-trash"></i> Limpiar</button>
             </div>
             <div class="card-footer">
                 <table class="table table-striped" [mfData]="locales" #mf="mfDataTable" [mfRowsOnPage]="5">
@@ -90,8 +91,8 @@
                             <td>{{item.costomes | currency: 'USD'}}</td>
                             <td>{{item.descripcion}}</td>
                             <td>
-                                <button class="btn btn-primary btn" (click)="elegirLocal(item)">Seleccinar</button>
-                                <button class="btn btn-primary btn" (click)="borrarLocal(item)">Borrar</button>
+                                <button class="btn btn-success mr-2" (click)="elegirLocal(item)"><i class="far fa-hand-point-up"></i> Seleccinar</button>
+                                <button class="btn btn-danger" (click)="borrarLocal(item)"><i class="fa fa-trash"></i> Borrar</button>
                             </td>
                         </tr>
                     </tbody>

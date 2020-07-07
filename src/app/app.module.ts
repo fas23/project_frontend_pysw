@@ -23,6 +23,8 @@ import { LoginComponent } from './components/login/login.component';
 import { NoticiaComponent } from './components/noticia/noticia.component';
 import { Novedad2Component } from './components/novedad2/novedad2.component';
 import { ContactoComponent } from './components/contacto/contacto.component';
+//import { GoogleMapsModule } from '@angular/google-maps';
+
 
 @NgModule({
   declarations: [
@@ -47,6 +49,7 @@ import { ContactoComponent } from './components/contacto/contacto.component';
     NgxDataTableModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    //GoogleMapsModule,
     FacebookModule.forRoot(),
     ToastrModule.forRoot({
       closeButton:true,
