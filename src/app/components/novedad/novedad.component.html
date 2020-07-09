@@ -16,7 +16,7 @@
                             <p class="card-text">{{item.texto}}</p>
                         </div>
                         <div class="card-footer">
-                            <div>Propietario : {{item.usuario.usuario}}</div>
+                            <div *ngIf="item.usuario != null">Propietario : {{item.usuario.usuario}}</div>
                             <hr>
                             <div class="badge-info" *ngIf="item.estado == 'Procesado'">Estado: {{item.estado}}</div>
                             <div *ngIf="item.estado != 'Procesado'">Estado: {{item.estado}}</div>

@@ -17,6 +17,9 @@ export class ContactoComponent implements OnInit {
   novedad:Novedad;
   propietario : Propietario;
   usuario : Usuario;
+  nombre : string = "";
+  email : string = "";
+  mensaje : string = "";
   punto = {
     title:"",
     position: {
@@ -30,13 +33,12 @@ export class ContactoComponent implements OnInit {
  };
 
   constructor(private servicio:NovedadService, private _toastr:ToastrService, 
-    private usuarioServi : UsuarioService, config: NgbModalConfig, private modalService: NgbModal) {
+    public usuarioServi : UsuarioService, config: NgbModalConfig, private modalService: NgbModal) {
       config.backdrop = 'static';
       config.keyboard = false;
       this.novedad= new Novedad();
       this.propietario = new Propietario();
       this.usuario= new Usuario();
-      this.getUsuario();
       //this.dibujarPunto();
      }
 
@@ -53,8 +55,15 @@ export class ContactoComponent implements OnInit {
       }
   
      addNovedad(){
+       if(this.usuarioServi.userLogged){
+        this.getUsuario();
+        this.novedad.usuario = this.usuario;
+      }
+       else{
+         this.mensaje = "Persona externa, nombre: "+this.nombre+", email: "+this.email+". Mensaje: "+this.novedad.texto;
+         this.novedad.texto = this.mensaje;
+       }
       this.novedad.estado = "Pendiente";
-      this.novedad.usuario = this.usuario;
       this.novedad.fecha = new Date();
       this.servicio.addNovedad(this.novedad).subscribe(
         (result) => {
