@@ -47,6 +47,10 @@ export class ContactoComponent implements OnInit {
       this.punto.label.color = "blue";
       this.punto.title="Facultad de Ingenieria UNJu";
       }
+
+      cambiarArchivo(files){
+        console.log("archivo cambiado", files);
+      }
   
      addNovedad(){
       this.novedad.estado = "Pendiente";

@@ -1,109 +1,110 @@
 <div *ngIf="loginService.userLoggedIn">
-    <div class="container">
-        <div class="card">
-            <div class="card-header">
-                <form #formregistro="ngForm">
-                    <div class="card-header bg-info mb-3">
-                        <h2>Gestion de Locales</h2>
-                    </div>
-                    <div class="form-group row">
-                        <label for="superficie" class="col-md-4 col-sm-12">Superficie</label>
-                        <input type="number" class="form-control col-md-8 col-sm-12" id="superficie" name="superficie"
-                            placeholder="ingrese superficie" required maxlength="7" [(ngModel)]="local.superficie"
-                            #superficie="ngModel" />
-                        <div *ngIf="superficie.invalid && (superficie.dirty || superficie.touched)"
-                            class="alert alert-danger col-12">
-                            <div *ngIf="superficie.errors.required">
-                                Superficie es campo requerido
+    <div *ngIf="loginService.userLogged.perfil == 'administrativo' || loginService.userLogged.perfil == 'administrador'">
+        <div class="container">
+            <div class="card">
+                <div class="card-header">
+                    <form #formregistro="ngForm">
+                        <div class="card-header bg-info mb-3">
+                            <h2>Gestion de Locales</h2>
+                        </div>
+                        <div class="form-group row">
+                            <label for="superficie" class="col-md-4 col-sm-12">Superficie</label>
+                            <input type="number" class="form-control col-md-8 col-sm-12" id="superficie" name="superficie"
+                                placeholder="ingrese superficie" required maxlength="7" [(ngModel)]="local.superficie"
+                                #superficie="ngModel" />
+                            <div *ngIf="superficie.invalid && (superficie.dirty || superficie.touched)"
+                                class="alert alert-danger col-12">
+                                <div *ngIf="superficie.errors.required">
+                                    Superficie es campo requerido
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="imagen" class="col-md-4 col-sm-12">Imagen</label>
-                        <input type="file" alife-file-to-base64 (onFileChanged)="cambiarArchivo($event)"
-                            class="form-control col-md-8 col-sm-12" id="imagen" name="imagen" required />
-                        
-                    </div>
-                    <div class="form-group row">
-                        <label for="alquilado" class="col-md-6 col-sm-12">Es Alquilado</label>
-                        <input type="checkbox" class="form-control col-md-6 col-sm-12" id="alqilado"
-                            name="alquilado" [(ngModel)]="local.alquilado">
-                    </div>
-                    <div class="form-group row">
-                        <label for="costo" class="col-md-4 col-sm-12">Costo Mensual</label>
-                        <input type="number" class="form-control col-md-8 col-sm-12" id="costo" name="costo"
-                            placeholder="ingrese valor del costo mensual" required [(ngModel)]="local.costomes"
-                            #costo="ngModel" />
-                        <div *ngIf="costo.invalid && (costo.dirty || costo.touched)" class="alert alert-danger col-12">
-                            <div *ngIf="costo.errors.required">
-                                Costo es campo requerido
+                        <div class="form-group row">
+                            <label for="imagen" class="col-md-4 col-sm-12">Imagen</label>
+                            <input type="file" alife-file-to-base64 (onFileChanged)="cambiarArchivo($event)" class="form-control col-md-8 col-sm-12" id="imagen" name="imagen" required />
+                            
+                        </div>
+                        <div class="form-group row">
+                            <label for="alquilado" class="col-md-6 col-sm-12">Es Alquilado</label>
+                            <input type="checkbox" class="form-control col-md-6 col-sm-12" id="alquilado"
+                                name="alquilado" [(ngModel)]="local.alquilado">
+                        </div>
+                        <div class="form-group row">
+                            <label for="costo" class="col-md-4 col-sm-12">Costo Mensual</label>
+                            <input type="number" class="form-control col-md-8 col-sm-12" id="costo" name="costo"
+                                placeholder="ingrese valor del costo mensual" required [(ngModel)]="local.costomes"
+                                #costo="ngModel" />
+                            <div *ngIf="costo.invalid && (costo.dirty || costo.touched)" class="alert alert-danger col-12">
+                                <div *ngIf="costo.errors.required">
+                                    Costo es campo requerido
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="descripcion" class="col-md-4 col-sm-12">Descripcion</label>
-                        <input type="text" class="form-control col-md-8 col-sm-12" id="descripcion" name="descripcion"
-                            placeholder="ingrese descripcion" required [(ngModel)]="local.descripcion"
-                            #descripcion="ngModel" />
-                        <div *ngIf="descripcion.invalid && (descripcion.dirty || descripcion.touched)"
-                            class="alert alert-danger col-12">
-                            <div *ngIf="descripcion.errors.required">
-                                Descripcion es campo requerido
+                        <div class="form-group row">
+                            <label for="descripcion" class="col-md-4 col-sm-12">Descripcion</label>
+                            <input type="text" class="form-control col-md-8 col-sm-12" id="descripcion" name="descripcion"
+                                placeholder="ingrese descripcion" required [(ngModel)]="local.descripcion"
+                                #descripcion="ngModel" />
+                            <div *ngIf="descripcion.invalid && (descripcion.dirty || descripcion.touched)"
+                                class="alert alert-danger col-12">
+                                <div *ngIf="descripcion.errors.required">
+                                    Descripcion es campo requerido
+                                </div>
                             </div>
                         </div>
-                    </div>
-
-                </form>
-            </div>
-            <div class="card-body">
-                <button type="button" class="btn btn-primary mr-3" (click)="saveLocal()"
-                    [disabled]="!formregistro.form.valid || existe"><i
-                    class="fa fa-save"></i> Agregar</button>
-                <button type="button" class="btn btn-primary mr-3 align-content-center"
-                    [disabled]="!formregistro.form.valid || !existe" (click)="modificarLocal()"><i class="far fa-edit"></i> Modificar</button>
-                <button type="button" class="btn btn-primary align-content-center" (click)="limpiar()"><i class="fa fa-trash"></i> Limpiar</button>
-            </div>
-            <div class="card-footer">
-                <table class="table table-striped" [mfData]="locales" #mf="mfDataTable" [mfRowsOnPage]="5">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">
-                                <mfDefaultSorter by="superficie">Superficie</mfDefaultSorter>
-                            </th>
-                            <th scope="col">Imagen</th>
-                            <th scope="col">Esta Alquilado</th>
-                            <th scope="col">
-                                <mfDefaultSorter by="costomes">Costo Mensual</mfDefaultSorter>
-                            </th>
-                            <th scope="col">
-                                <mfDefaultSorter by="descripcion">Descripci&iacute;n</mfDefaultSorter>
-                            </th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let item of mf.data">
-                            <td></td>
-                            <td>{{item.superficie}}</td>
-                            <td><img src="{{item.imagen}}" class="img"></td>
-                            <td>{{item.alquilado}}</td>
-                            <td>{{item.costomes | currency: 'USD'}}</td>
-                            <td>{{item.descripcion}}</td>
-                            <td>
-                                <button class="btn btn-success mr-2" (click)="elegirLocal(item)"><i class="far fa-hand-point-up"></i> Seleccinar</button>
-                                <button class="btn btn-danger" (click)="borrarLocal(item)"><i class="fa fa-trash"></i> Borrar</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <td colspan="4">
-                                <mfBootstrapPaginator [rowsOnPageSet]="[5,10,20]"></mfBootstrapPaginator>
-                            </td>
-                        </tr>
-                    </tfoot>
-                </table>
+    
+                    </form>
+                </div>
+                <div class="card-body form-group text-center">
+                    <button type="button" class="btn btn-primary mr-3" (click)="saveLocal()"
+                        [disabled]="!formregistro.form.valid || existe"><i
+                        class="fa fa-save"></i> Agregar</button>
+                    <button type="button" class="btn btn-primary mr-3 align-content-center"
+                        [disabled]="!formregistro.form.valid || !existe" (click)="modificarLocal()"><i class="far fa-edit"></i> Modificar</button>
+                    <button type="button" class="btn btn-primary align-content-center" (click)="limpiar()"><i class="fa fa-trash"></i> Limpiar</button>
+                </div>
+                <div class="card-footer">
+                    <table class="table table-striped" [mfData]="locales" #mf="mfDataTable" [mfRowsOnPage]="5">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">
+                                    <mfDefaultSorter by="superficie">Superficie</mfDefaultSorter>
+                                </th>
+                                <th scope="col">Imagen</th>
+                                <th scope="col">Esta Alquilado</th>
+                                <th scope="col">
+                                    <mfDefaultSorter by="costomes">Costo Mensual</mfDefaultSorter>
+                                </th>
+                                <th scope="col">
+                                    <mfDefaultSorter by="descripcion">Descripci&iacute;n</mfDefaultSorter>
+                                </th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of mf.data">
+                                <td></td>
+                                <td>{{item.superficie}}</td>
+                                <td><img src="{{item.imagen}}" class="img"></td>
+                                <td>{{item.alquilado}}</td>
+                                <td>{{item.costomes | currency: 'USD'}}</td>
+                                <td>{{item.descripcion}}</td>
+                                <td>
+                                    <button class="btn btn-success mr-2" (click)="elegirLocal(item)"><i class="far fa-hand-point-up"></i> Seleccinar</button>
+                                    <button class="btn btn-danger" (click)="borrarLocal(item)"><i class="fa fa-trash"></i> Borrar</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="4">
+                                    <mfBootstrapPaginator [rowsOnPageSet]="[5,10,20]"></mfBootstrapPaginator>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

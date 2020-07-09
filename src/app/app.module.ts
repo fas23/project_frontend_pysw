@@ -9,6 +9,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import {HttpClientModule} from '@angular/common/http';
 import { FacebookModule } from 'ngx-fb';
+import { AlifeFileToBase64Module } from 'alife-file-to-base64';
 
 import { HeaderComponent } from './components/layout/header/header.component';
 import { FooterComponent } from './components/layout/footer/footer.component';
@@ -49,6 +50,7 @@ import { ContactoComponent } from './components/contacto/contacto.component';
     NgxDataTableModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    AlifeFileToBase64Module,
     //GoogleMapsModule,
     FacebookModule.forRoot(),
     ToastrModule.forRoot({

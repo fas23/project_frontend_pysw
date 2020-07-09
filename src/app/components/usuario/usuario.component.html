@@ -1,4 +1,4 @@
-<div *ngIf="servicio.userLoggedIn">
+<div *ngIf="servicio.userLoggedIn && servicio.userLogged.perfil == 'administrador'">
     <div class="container">
         <div class="card">
             <div class="card-header">
@@ -38,10 +38,14 @@
                             <option value="administrador">Administrador</option>
                         </select>
                     </div>
+                    <div class="form-group row">
+                        <label for="activo" class="col-md-4 col-sm-12">Estado</label>
+                        <input type="checkbox" id="activo" class="col-md-8 col-sm-12 form-control" name="activo" [(ngModel)]="usuario.activo">
+                    </div>
                 </form>
             </div>
         </div>
-        <div class="card-body">
+        <div class="card-body form-group text-center">
             <button type="button" class="btn btn-primary mr-3" (click)="altaUsuario()"
                 [disabled]="!formregistro.form.valid || existe"><i class="fa fa-save"></i> Agregar</button>
             <button type="button" class="btn btn-primary align-content-center mr-3"
@@ -54,10 +58,11 @@
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">
-                            <mfDefaultSorter by="usuario">usuario</mfDefaultSorter>
+                            <mfDefaultSorter by="usuario">Nombre Usuario</mfDefaultSorter>
                         </th>
-                        <th scope="col">password</th>
-                        <th scope="col">perfil</th>
+                        <th scope="col">Password</th>
+                        <th scope="col"><mfDefaultSorter by="perfil">Perfil</mfDefaultSorter></th>
+                        <th scope="col"><mfDefaultSorter by="activo">Estado</mfDefaultSorter></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -66,9 +71,10 @@
                         <td>{{item.usuario}}</td>
                         <td>{{item.password}}</td>
                         <td>{{item.perfil}}</td>
+                        <th>{{item.activo}}</th>
                         <td>
                             <button class="btn btn-success mr-3" (click)="elegirUsuario(item)"><i class="far fa-hand-point-up"></i> Seleccinar</button>
-                            <button class="btn btn-primary btn" (click)="bajaUsuario(item)"><i class="fa fa-trash"></i> Borrar</button>
+                            <button class="btn btn-danger btn" (click)="bajaUsuario(item)"><i class="fa fa-trash"></i> Borrar</button>
                         </td>
                     </tr>
                 </tbody>

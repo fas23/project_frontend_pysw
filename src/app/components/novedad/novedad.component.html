@@ -1,31 +1,33 @@
 <div *ngIf="loginService.userLoggedIn">
-    <div class="container">
-        <div class="card">
-            <div class="card-header">
-                <div class="card-header bg-info mb-3">
-                    <h2>Control de novedades</h2>
+    <div *ngIf="loginService.userLogged.perfil == 'administrativo' || loginService.userLogged.perfil == 'administrador'">
+        <div class="container">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-header bg-info mb-3">
+                        <h2>Control de novedades</h2>
+                    </div>
                 </div>
-            </div>
-            <div class="card-body row">
-                <div class="card col-12 mb-2" *ngFor="let item of novedades">
-                    <div class="card-header bg-secondary">
-                        <h5 class="card-title">Novedad {{item.fecha | date:'dd-MM-yyyy'}}</h5>
+                <div class="card-body row">
+                    <div class="card col-12 mb-2" *ngFor="let item of novedades">
+                        <div class="card-header bg-secondary">
+                            <h5 class="card-title">Novedad {{item.fecha | date:'dd-MM-yyyy'}}</h5>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">{{item.texto}}</p>
+                        </div>
+                        <div class="card-footer">
+                            <div>Propietario : {{item.usuario.usuario}}</div>
+                            <hr>
+                            <div class="badge-info" *ngIf="item.estado == 'Procesado'">Estado: {{item.estado}}</div>
+                            <div *ngIf="item.estado != 'Procesado'">Estado: {{item.estado}}</div>
+                        </div>
+                        <button class="btn btn-lg btn-primary" (click)="modificarNovedad(item)">Procesado</button>
                     </div>
-                    <div class="card-body">
-                        <p class="card-text">{{item.texto}}</p>
-                    </div>
-                    <div class="card-footer">
-                        <div>Propietario : {{item.usuario.usuario}}</div>
-                        <hr>
-                        <div class="badge-info" *ngIf="item.estado == 'Procesado'">Estado: {{item.estado}}</div>
-                        <div *ngIf="item.estado != 'Procesado'">Estado: {{item.estado}}</div>
-                    </div>
-                    <button class="btn btn-lg btn-primary" (click)="modificarNovedad(item)">Procesado</button>
+    
                 </div>
-
+    
             </div>
-
+    
         </div>
-
     </div>
 </div>

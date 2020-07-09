@@ -48,6 +48,7 @@
                 <textarea class="col-md-8 col-sm-12 form-control" name="novedad" id="novedad" cols="20" rows="5"
                 [(ngModel)]="novedad.texto" required></textarea>
                 <div class="col-md-4 col-sm-12"></div>
+                <input type="file" alife-file-to-base64 (onFileChanged)="cambiarArchivo($event)" class="form-control col-md-8 col-sm-12" id="imagen" name="imagen" required />
                 <div class="col-md-4 col-sm-12 mt-2">
                     <button type="submit" class="btn btn-primary btn-block" (click)="open(content)" [disabled]="!formregistro.form.valid"><i
                         class="fa fa-save"></i>  Agregar</button>

@@ -31,7 +31,12 @@ export class LoginComponent implements OnInit {
       if(user.perfil =='administrativo')   // testing
             this.loginService.userLoggedAdtt = true; // testing
  this.router.navigateByUrl(this.returnUrl);
-  } else {
+  }
+  if(user.status == 2){
+    this.msglogin="Usuario inactivo";
+    this.usuario = new Usuario();
+  }
+  else {
   this.msglogin="Credenciales incorrectas..";
  }
   },

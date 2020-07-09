@@ -17,6 +17,7 @@ export class PropietarioComponent implements OnInit {
   propietario: Propietario;
   propietarios: Array<Propietario>;
   propietarioJSON: JSON;
+  existe : boolean = false;
 
   constructor(private propietarioService: PropietarioService, private _toastr: ToastrService, public loginService:UsuarioService
     ) {
@@ -56,9 +57,12 @@ refrescarPropietarios() {
 }
 
 elegirPropietario(propietario: Propietario) {
+  this.existe = true;
   var prop = new Propietario();
   Object.assign(prop, propietario);
   this.propietario = prop;
+  this._toastr.info("Propietario elegido","Info");
+
 }
 
 //crud Propietarios
@@ -67,13 +71,12 @@ guardarPropietario(form: NgForm) {
     (result) => {
       console.log(result);
       form.resetForm();
-      this._toastr.success("guardado con exito", "Exito");
+      this._toastr.success("Propietario guardado", "Exito");
       this.refrescarPropietarios();
       this.propietario = new Propietario();
     },
     (error) => {
-      console.log("error");
-      this._toastr.error("Error en la peticion", "Error");
+      this._toastr.error(error, "Error");
     }
   );
 }
@@ -81,8 +84,9 @@ guardarPropietario(form: NgForm) {
 modificarPropietario() {
   this.propietarioService.updatePropietario(this.propietario).subscribe(
     (result) => {
-      this._toastr.success("editado con exito", "Exito");
+      this._toastr.success("Propietario actualizado", "Exito");
       this.propietario = new Propietario();
+      this.existe = false;
       this.refrescarPropietarios();
     }
   );
@@ -93,16 +97,18 @@ modificarPropietario() {
 borrarPropietario(id: string) {
   this.propietarioService.deletePropietario(id).subscribe(
     (result) => {
-      this._toastr.success("Asistente eliminado con exito", "Exito");
+      this._toastr.success("Propietario eliminado", "Exito");
       this.refrescarPropietarios();
     },
     (error) => {
       console.log(error);
+      this._toastr.error(error,"Error");
     }
   );
 }
 
 limpiar(form: NgForm) {
+  this.existe = false;
   this.propietario = new Propietario();
   form.resetForm();
 }

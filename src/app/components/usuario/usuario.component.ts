@@ -28,7 +28,7 @@ export class UsuarioComponent implements OnInit {
        }
      ),
      (error) => {
-       this._toastr.error(error, "fail");
+       this._toastr.error(error, "Error");
      }
      this.usuario = new Usuario();
      this.listarUsuario();
@@ -58,10 +58,12 @@ export class UsuarioComponent implements OnInit {
     );
     this.usuario = new Usuario();
     this.listarUsuario();
+    this.existe = false;
   }
 
   limpiar(){
     this.usuario = new Usuario();
+    this.existe = false;
   }
 
   listarUsuario(){

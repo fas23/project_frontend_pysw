@@ -1,153 +1,154 @@
 <div *ngIf="loginService.userLoggedIn">
-
-    <div class="container">
-        <div class="card">
-            <div class="card-header">
-                <div class="card-header bg-info mb-3">
-                    <h2>Gestion de Contratos</h2>
-                </div>
-            </div>
-            <div class="card-body row">
-                <div class="card col-10" *ngFor="let item of locales">
-                    <div class="card-header">
-                        <h5 class="card-title">Local</h5>
-                    </div>
-                    <div class="card-body">
-                        <img class="img" src="{{item.imagen}}" alt="...">
-                        <p class="card-text">Descripcion: {{item.descripcion}}</p>
-                    </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">Superficie: {{item.superficie}}</li>
-                        <li class="list-group-item">Costo Mensual: {{item.costomes | currency: 'USD'}}, mas la mitad de un mes de Deposito</li>
-                    </ul>
-                    <div class="card-body row">
-                        <button class="btn btn-dark mr-3" [disabled]="item.alquilado" (click)="agregarLocal(item)"><i
-                            class="fa fa-save"></i> Agregar</button>
-                        <button class="btn btn-dark" [disabled]="!item.alquilado" (click)="quitarLocal(item)"><i class="fa fa-trash"></i> Quitar</button>
-                        <div *ngIf="item.alquilado" class="alert alert-info col-12">Local agregado</div>
+    <div *ngIf="loginService.userLogged.perfil == 'administrativo' || loginService.userLogged.perfil == 'administrador'">
+        <div class="container">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-header bg-info mb-3">
+                        <h2>Gestion de Contratos</h2>
                     </div>
                 </div>
-                <div>
-                    <div class="row">
-                        <div class="accordion col-12" id="accordionExample">
-                            <div class="card row">
-                                <div class=" col-12 card-header" id="headingOne">
-                                    <h2 class="mb-0">
-                                        <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse"
-                                            data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                                            Locales
-                                        </button>
-                                    </h2>
-                                </div>
-                            </div>
+                <div class="card-body row">
+                    <div class="card col-10" *ngFor="let item of locales">
+                        <div class="card-header">
+                            <h5 class="card-title">Local</h5>
                         </div>
-                        <div id="collapseOne" class="collapse show col-12" aria-labelledby="headingOne" data-parent="#accordionExample">
-                             <table class="table table-sm">
-                                <thead>
-                                    <tr>
-                                        <th>Superficie</th>
-                                        <th>Imagen</th>
-                                        <th>Costo Mensual</th>
-                                        <th>Descripcion</th>
-                                        <th>Acciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr *ngFor="let item of contrato.locales">
-                                        <th>{{item.superficie}}</th>
-                                        <td><img class="imgTabla" src="{{item.imagen}}"></td>
-                                        <td>{{item.costomes}}</td>
-                                        <td>{{item.descripcion}}</td>
-                                        <td><button class="btn btn-danger" [disabled]="cerrado" (click)="quitarLocal(item)"><i class="fa fa-trash"></i> Quitar</button></td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                        <div class="card-body form-group text-center">
+                            <img class="imagen" src="{{item.imagen}}" alt="...">
+                            <p class="card-text">Descripcion: {{item.descripcion}}</p>
                         </div>
-                        <div class="col-12">
-                            <form #formregistro="ngForm">
-                    
-                                <div class="form-group row">
-                                    <label for="idprop" class="col-md-4">Propietario</label>
-                                    <select id="idprop" class="form-control form-control-sm col-md-8" required name="propietario"
-                                        #prop="ngModel" [(ngModel)]="contrato.propietario">
-                                        <option *ngFor="let prop of propietarios" [ngValue]="prop">{{prop.nombres}}</option>
-                                    </select>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="costo" class="col-md-4 col-sm-12">Costo Total</label>
-                                    <input type="number" readonly class="form-control col-md-8 col-sm-12" id="costo" name="costo"
-                                        placeholder="ingrese costo total" required [(ngModel)]="contrato.costoTotalAlq" #costo="ngModel" />
-                                    <div *ngIf="costo.invalid && (costo.dirty || costo.touched)" class="alert alert-danger col-12">
-                                        <div *ngIf="costo.errors.required">
-                                            Costo es campo requerido
-                                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Superficie: {{item.superficie}}</li>
+                            <li class="list-group-item">Costo Mensual: {{item.costomes | currency: 'USD'}}, mas la mitad de un mes de Deposito</li>
+                        </ul>
+                        <div class="card-body row">
+                            <button class="btn btn-dark mr-3" [disabled]="item.alquilado" (click)="agregarLocal(item)"><i
+                                class="fa fa-save"></i> Agregar</button>
+                            <button class="btn btn-dark" [disabled]="!item.alquilado" (click)="quitarLocal(item)"><i class="fa fa-trash"></i> Quitar</button>
+                            <div *ngIf="item.alquilado" class="alert alert-info col-12">Local agregado</div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="row">
+                            <div class="accordion col-12" id="accordionExample">
+                                <div class="card row">
+                                    <div class=" col-12 card-header" id="headingOne">
+                                        <h2 class="mb-0">
+                                            <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse"
+                                                data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                                Locales
+                                            </button>
+                                        </h2>
                                     </div>
                                 </div>
-                            </form>
-                        </div>
-                        <div class="col-12">
-                            <button type="button" class="btn btn-primary mr-3" (click)="saveContrato()"
-                            [disabled]="!formregistro.form.valid || existe"><i class="fa fa-save"></i> Agregar</button>
-                        <button type="button" class="btn btn-primary align-content-center mr-3"
-                            [disabled]="!formregistro.form.valid || !existe || cerrado" (click)="modificarContrato()"><i class="far fa-edit"></i> Modificar</button>
-                        <button type="button" class="btn btn-primary align-content-center" (click)="limpiar()"><i class="fa fa-trash"></i> Limpiar</button>
+                            </div>
+                            <div id="collapseOne" class="collapse show col-12" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                 <table class="table table-sm">
+                                    <thead>
+                                        <tr>
+                                            <th>Superficie</th>
+                                            <th>Imagen</th>
+                                            <th>Costo Mensual</th>
+                                            <th>Descripcion</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let item of contrato.locales">
+                                            <th>{{item.superficie}}</th>
+                                            <td><img class="imgTabla" src="{{item.imagen}}"></td>
+                                            <td>{{item.costomes}}</td>
+                                            <td>{{item.descripcion}}</td>
+                                            <td><button class="btn btn-danger" [disabled]="cerrado" (click)="quitarLocal(item)"><i class="fa fa-trash"></i> Quitar</button></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-12">
+                                <form #formregistro="ngForm">
+                        
+                                    <div class="form-group row">
+                                        <label for="idprop" class="col-md-4">Propietario</label>
+                                        <select id="idprop" class="form-control form-control-sm col-md-8" required name="propietario"
+                                            #prop="ngModel" [(ngModel)]="contrato.propietario">
+                                            <option *ngFor="let prop of propietarios" [ngValue]="prop">{{prop.nombres}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="costo" class="col-md-4 col-sm-12">Costo Total</label>
+                                        <input type="number" readonly class="form-control col-md-8 col-sm-12" id="costo" name="costo"
+                                            placeholder="ingrese costo total" required [(ngModel)]="contrato.costoTotalAlq" #costo="ngModel" />
+                                        <div *ngIf="costo.invalid && (costo.dirty || costo.touched)" class="alert alert-danger col-12">
+                                            <div *ngIf="costo.errors.required">
+                                                Costo es campo requerido
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-12">
+                                <button type="button" class="btn btn-primary mr-3" (click)="saveContrato()"
+                                [disabled]="!formregistro.form.valid || existe"><i class="fa fa-save"></i> Agregar</button>
+                            <button type="button" class="btn btn-primary align-content-center mr-3"
+                                [disabled]="!formregistro.form.valid || !existe || cerrado" (click)="modificarContrato()"><i class="far fa-edit"></i> Modificar</button>
+                            <button type="button" class="btn btn-primary align-content-center" (click)="limpiar()"><i class="fa fa-trash"></i> Limpiar</button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="card-footer">
-                <div class="accordion" id="according">
-                    <div class="card row">
-                        <div class=" col-12 card-header" id="heading">
-                            <h2 class="mb-0">
-                                <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse"
-                                    data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseOne">
-                                    Contratos
-                                </button>
-                            </h2>
+                <div class="card-footer">
+                    <div class="accordion" id="according">
+                        <div class="card row">
+                            <div class=" col-12 card-header" id="heading">
+                                <h2 class="mb-0">
+                                    <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse"
+                                        data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseOne">
+                                        Contratos
+                                    </button>
+                                </h2>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div id="collapseTwo" class="collapse show" aria-labelledby="heading" data-parent="#accordionExample">
-                    <table class="table table-striped" [mfData]="contratos" #mf="mfDataTable" [mfRowsOnPage]="5">
-                        <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">
-                                    <mfDefaultSorter by="fecha">Fecha</mfDefaultSorter>
-                                </th>
-                                <th scope="col">Propietario</th>
-                                <th scope="col">Locales</th>
-                                <th scope="col">Contrato Cerrado</th>
-                                <th scope="col">
-                                    <mfDefaultSorter by="costoTotalAlq">Costo Total</mfDefaultSorter>
-                                </th>
-                                <th>Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let item of mf.data">
-                                <td></td>
-                                <td>{{item.fecha | date:'dd-MM-yyyy'}}</td>
-                                <td>{{item.propietario.nombres}}</td>
-                                <td>{{item.locales.superficie}}</td>
-                                <td>{{item.cerrado}}</td>
-                                <td>{{item.costoTotalAlq | currency: 'USD'}}</td>
-                                <td>
-                                    <button class="btn btn-success mr-3" (click)="elegirContrato(item)"><i class="far fa-hand-point-up"></i> Seleccinar</button>
-                                    <button class="btn btn-primary mr-3" [disabled]="item.cerrado"  (click)="cerrarContrato(item)"><i class="fas fa-file-contract"></i> Cerrar Contrato</button>
-                                    <button class="btn btn-danger" (click)="borrarContrato(item)"><i class="fa fa-trash"></i> Borrar</button>
-                                </td>
-                            </tr>
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <td colspan="4">
-                                    <mfBootstrapPaginator [rowsOnPageSet]="[5,10,20]"></mfBootstrapPaginator>
-                                </td>
-                            </tr>
-                        </tfoot>
-                    </table>
+                    <div id="collapseTwo" class="collapse show" aria-labelledby="heading" data-parent="#accordionExample">
+                        <table class="table table-striped" [mfData]="contratos" #mf="mfDataTable" [mfRowsOnPage]="5">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">
+                                        <mfDefaultSorter by="fecha">Fecha</mfDefaultSorter>
+                                    </th>
+                                    <th scope="col">Propietario</th>
+                                    <th scope="col">Locales</th>
+                                    <th scope="col">Contrato Cerrado</th>
+                                    <th scope="col">
+                                        <mfDefaultSorter by="costoTotalAlq">Costo Total</mfDefaultSorter>
+                                    </th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of mf.data">
+                                    <td></td>
+                                    <td>{{item.fecha | date:'dd-MM-yyyy'}}</td>
+                                    <td>{{item.propietario.nombres}}</td>
+                                    <td>{{item.locales.superficie}}</td>
+                                    <td>{{item.cerrado}}</td>
+                                    <td>{{item.costoTotalAlq | currency: 'USD'}}</td>
+                                    <td>
+                                        <button class="btn btn-success mr-3" (click)="elegirContrato(item)"><i class="far fa-hand-point-up"></i> Seleccinar</button>
+                                        <button class="btn btn-primary mr-3" [disabled]="item.cerrado"  (click)="cerrarContrato(item)"><i class="fas fa-file-contract"></i> Cerrar Contrato</button>
+                                        <button class="btn btn-danger" (click)="borrarContrato(item)"><i class="fa fa-trash"></i> Borrar</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="4">
+                                        <mfBootstrapPaginator [rowsOnPageSet]="[5,10,20]"></mfBootstrapPaginator>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

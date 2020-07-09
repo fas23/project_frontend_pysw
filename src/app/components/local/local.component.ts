@@ -19,6 +19,7 @@ export class LocalComponent implements OnInit {
 
   constructor(private localServ:LocalService, private _toastr:ToastrService, public loginService:UsuarioService) { 
     this.local = new Local();
+    this.convertido = "";
     this.locales = new Array<Local>();
     this.listarLocales();
     this.local.alquilado = false;
@@ -29,13 +30,13 @@ export class LocalComponent implements OnInit {
     var local = new Local();
     Object.assign(local, loc);
     this.local = local;
-    this._toastr.info("Pasaje elegido","Info");
+    this._toastr.info("Local elegido","Info");
   }
 
   modificarLocal(){
     this.localServ.updateLocal(this.local).subscribe(
       (result)=>{
-        this._toastr.success("Pasaje actualizado","Exito");
+        this._toastr.success("Local actualizado","Exito");
       },
       (error)=>{
         this._toastr.error(error,"Error");
@@ -49,7 +50,7 @@ export class LocalComponent implements OnInit {
   borrarLocal(loc: Local){
     this.localServ.deleteLocal(loc).subscribe(
       (result)=>{
-        this._toastr.success("Asistente eliminado","Exito");
+        this._toastr.success("Local eliminado","Exito");
       }, 
       (error)=>{
         this._toastr.error(error,"Error");
@@ -63,7 +64,7 @@ export class LocalComponent implements OnInit {
     this.local.alquilado = false;
     this.localServ.addLocal(this.local).subscribe(
         (result)=>{
-          this._toastr.success("Pasaje guardado","Exito");
+          this._toastr.success("Local guardado","Exito");
         },
         (error)=>{
           this._toastr.error(error,"Error");
