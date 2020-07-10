@@ -7,14 +7,15 @@
                         <h2>Gestion de Usuarios</h2>
                     </div>
                     <div class="form-group row">
-                        <label for="user" class="col-md-4 col-sm-12">Usuario</label>
-                        <input type="email" class="form-control col-md-8 col-sm-12" id="user" name="user"
-                            placeholder="ingrese nombre de usuario" required [(ngModel)]="usuario.usuario"
-                            #user="ngModel" />
-                        <div *ngIf="user.invalid && (user.dirty || user.touched)" class="alert alert-danger col-12">
-                            <div *ngIf="user.errors.required">
-                                nombre de usuario requerido
-                            </div>
+                        <label for="usu" class="col-md-4 col-sm-12">Usuario</label>
+                        <select id="usu" class="form-control form-control-sm col-md-8 col-sm-12" required name="usu"
+                            #prop="ngModel" [(ngModel)]="usuario.usuario" (change)="validarUsuario()">
+                            <option *ngFor="let prop of propietarios" [ngValue]="prop">{{prop}}</option>
+                        </select>
+                        <div class="col-md-4"></div>
+                        <small id="emailHelp" class="form-text text-muted col-md-8 col-sm-12"><a class="nav-link" [routerLink]="['/propietario']" routerLinkActive="router-link-active">Ir a gestion de propietario</a></small>
+                        <div *ngIf="!valido" class="alert alert-danger col-12">
+                            Usuario no valido
                         </div>
                     </div>
                     <div class="form-group row">
@@ -47,12 +48,12 @@
             </div>
 
             <div class="card-body form-group text-center">
-                <button type="button" class="btn btn-primary mr-3" (click)="altaUsuario()"
-                    [disabled]="!formregistro.form.valid || existe"><i class="fa fa-save"></i> Agregar</button>
+                <button type="button" class="btn btn-primary mr-3" (click)="altaUsuario(formregistro)"
+                    [disabled]="!formregistro.form.valid || existe || !valido"><i class="fa fa-save"></i> Agregar</button>
                 <button type="button" class="btn btn-primary align-content-center mr-3"
                     [disabled]="!formregistro.form.valid || !existe" (click)="modificarUsuario()"><i
                         class="far fa-edit"></i> Modificar</button>
-                <button type="button" class="btn btn-primary align-content-center" (click)="limpiar()"><i
+                <button type="button" class="btn btn-primary align-content-center" (click)="limpiar(formregistro)"><i
                         class="fa fa-trash"></i> Limpiar</button>
             </div>
             <div class="card-footer">

@@ -64,7 +64,7 @@ export class LocalComponent implements OnInit {
   }
 
 
-  saveLocal(){
+  saveLocal(form: NgForm){
     this.local.alquilado = false;
     this.localServ.addLocal(this.local).subscribe(
         (result)=>{
@@ -74,6 +74,7 @@ export class LocalComponent implements OnInit {
           this._toastr.error(error,"Error");
         }
       ) 
+      form.resetForm();
       this.local = new Local();
       this.listarLocales();
   }
@@ -102,9 +103,10 @@ export class LocalComponent implements OnInit {
     this.local.imagen = this.convertido;
   }
 
-  limpiar(){
+  limpiar(form:NgForm){
     this.local = new Local();
     this.existe = false;
+    form.resetForm();
   }
 
   getLocalesLibres(){

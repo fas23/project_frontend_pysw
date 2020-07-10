@@ -59,12 +59,12 @@
                     </form>
                 </div>
                 <div class="card-body form-group text-center">
-                    <button type="button" class="btn btn-primary mr-3" (click)="saveLocal()"
+                    <button type="button" class="btn btn-primary mr-3" (click)="saveLocal(formregistro)"
                         [disabled]="!formregistro.form.valid || existe"><i class="fa fa-save"></i> Agregar</button>
                     <button type="button" class="btn btn-primary mr-3 align-content-center"
                         [disabled]="!formregistro.form.valid || !existe" (click)="modificarLocal()"><i
                             class="far fa-edit"></i> Modificar</button>
-                    <button type="button" class="btn btn-primary align-content-center" (click)="limpiar()"><i
+                    <button type="button" class="btn btn-primary align-content-center" (click)="limpiar(formregistro)"><i
                             class="fa fa-trash"></i> Limpiar</button>
                 </div>
                 <div class="card-footer">

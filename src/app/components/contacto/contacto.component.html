@@ -33,7 +33,7 @@
             </p>
             <form class="row form-group" #formregistro="ngForm">
                 <h4 class="col-12">Ingrese su coonsulta </h4>
-                <div *ngIf="!usuarioServi.userLogged" class="col-12 row">
+                <div *ngIf="!usuarioServi.userLoggedIn" class="col-12 row">
                     <label class="col-md-4 col-sm-12" for="nombre">Nombre</label>
                     <input class="col-md-8 col-sm-12 form-control" type="text" id="nombre" name="nombre"  placeholder="Ingrese su nombre completo"
                     [(ngModel)]="nombre">
@@ -41,9 +41,11 @@
                     <input class="col-md-8 col-sm-12 form-control" type="email" id="email" name="email"  placeholder="Ingrese direccion de Email"
                     [(ngModel)]="email">    
                 </div>
-                <label class="col-md-4 col-sm-12" for="novedad">Novedad</label>
-                <textarea class="col-md-8 col-sm-12 form-control" name="novedad" id="novedad" cols="20" rows="5"
-                [(ngModel)]="novedad.texto" required></textarea>
+                <div class="col-12 row">
+                    <label class="col-md-4 col-sm-12" for="novedad">Novedad</label>
+                    <textarea class="col-md-8 col-sm-12 form-control" name="novedad" id="novedad" cols="20" rows="5"
+                    [(ngModel)]="novedad.texto" required></textarea>
+                </div>
                 <div class="col-md-4 col-sm-12"></div>
                 <div class="col-md-4 col-sm-12 mt-2">
                     <button type="submit" class="btn btn-primary btn-block" (click)="open(content)" [disabled]="!formregistro.form.valid"><i

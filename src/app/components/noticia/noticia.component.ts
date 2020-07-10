@@ -91,12 +91,14 @@ export class NoticiaComponent implements OnInit {
     this.noti = vnoti;
   }
 
-  limpiarNoticia(){
+  limpiarNoticia(form : NgForm){
     this.noti = new Noticia();
+    this.modifica = false;
+    form.resetForm();
   }
 
   //CRUD noticia 
-  altaNoticia(){
+  altaNoticia(form:NgForm){
     this.noticiaServ.addNoticia(this.noti).subscribe(
       (result) => {
         this._toastr.success("Noticia Registrada", "Exito");
@@ -106,7 +108,7 @@ export class NoticiaComponent implements OnInit {
          this._toastr.error(error, "fail");
     }
     )
-
+    form.resetForm();
     this.noti = new Noticia();    
   }
 

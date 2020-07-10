@@ -82,6 +82,13 @@ export class UsuarioService {
         return this._http.delete( this.urlBase + usuario._id , httpOptions );
       }
     
-      
+      getPropietarios():Observable<any>{
+        const httpOptions = {
+          headers: new HttpHeaders({
+    
+          })
+        };
+        return this._http.get("http://localhost:3000/api/propietario/", httpOptions);
+      } 
      
 }

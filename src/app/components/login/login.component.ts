@@ -28,8 +28,6 @@ export class LoginComponent implements OnInit {
   if (user.status == 1){
  this.loginService.userLoggedIn = true;
   this.loginService.userLogged = user;
-      if(user.perfil =='administrativo')   // testing
-            this.loginService.userLoggedAdtt = true; // testing
  this.router.navigateByUrl(this.returnUrl);
   }
   if(user.status == 2){

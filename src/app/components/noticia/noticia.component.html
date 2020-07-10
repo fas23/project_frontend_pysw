@@ -65,11 +65,11 @@
         </div>
 
         <div class="card-body form-group text-center">
-          <button type="button" class="btn btn-primary mx-3" type="submit" [disabled]="formNoticia.invalid"
-            (click)="altaNoticia()"><i class="fa fa-save"></i> Agregar</button>
+          <button type="button" class="btn btn-primary mx-3" type="submit" [disabled]="formNoticia.invalid || modifica"
+            (click)="altaNoticia(formNoticia)"><i class="fa fa-save"></i> Agregar</button>
           <button type="button" class="btn btn-primary align-content-center mx-3" [disabled]="!modifica"
             (click)="modificarNoticia()"><i class="fa fa-save"></i> Modificar</button>
-          <button type="button" class="btn btn-primary align-content-center mx-3" (click)="limpiarNoticia()"><i
+          <button type="button" class="btn btn-primary align-content-center mx-3" (click)="limpiarNoticia(formNoticia)"><i
               class="fa fa-trash"></i> Limpiar</button>
         </div>
 

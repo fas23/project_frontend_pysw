@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Usuario } from './../../models/usuario';
 import {UsuarioService} from './../../services/usuario.service';
-  import {ToastrService} from 'ngx-toastr';
+import {ToastrService} from 'ngx-toastr';
+import {Propietario} from './../../models/propietario';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-usuario',
@@ -13,14 +15,18 @@ export class UsuarioComponent implements OnInit {
    usuario: Usuario;
    usuarios: Array<Usuario>;
    existe: boolean = false;
+   propietarios: Array<String>;
+   valido: boolean = true;
 
   constructor(public servicio:UsuarioService, private _toastr:ToastrService) { 
      this.usuario = new Usuario();
      this.usuarios = new Array<Usuario>();
+     this.propietarios = new Array<String>();
      this.listarUsuario();
-  }
+     this.getPropietarios();
+    }
 
-  altaUsuario(){
+  altaUsuario(form: NgForm){
      this.usuario.activo = true;
      this.servicio.addUsuario(this.usuario).subscribe(
        (result) => {
@@ -30,8 +36,9 @@ export class UsuarioComponent implements OnInit {
      (error) => {
        this._toastr.error(error, "Error");
      }
-     this.usuario = new Usuario();
      this.listarUsuario();
+     form.resetForm();
+     this.usuario = new Usuario();
    }
 
   bajaUsuario(usuario: Usuario){
@@ -56,14 +63,16 @@ export class UsuarioComponent implements OnInit {
         this._toastr.error(error,"Error");
       }
     );
-    this.usuario = new Usuario();
     this.listarUsuario();
+    this.usuario = new Usuario();
     this.existe = false;
   }
 
-  limpiar(){
+  limpiar(form : NgForm){
     this.usuario = new Usuario();
     this.existe = false;
+    this.valido = true;
+    form.resetForm();
   }
 
   listarUsuario(){
@@ -90,6 +99,32 @@ export class UsuarioComponent implements OnInit {
     Object.assign(usu, usuario);
     this.usuario = usu;
     this._toastr.info("Usuario elegido","Info");
+  }
+
+  getPropietarios(){
+    this.propietarios = new Array<String>();
+    this.servicio.getPropietarios().subscribe(
+      (result)=>{
+        var prop: Propietario = new Propietario();
+        result.forEach(element => {
+          Object.assign(prop, element);
+            this.propietarios.push(prop.email);
+          prop = new Propietario();
+        });
+      },
+      (error)=>{
+        this._toastr.error(error,"Error");
+      }
+    )
+  }
+
+  validarUsuario(){
+    this.valido = true;
+      for (let i = 0; i < this.usuarios.length; i++) {
+            if(this.usuarios[i].usuario == this.usuario.usuario){
+              this.valido = false;
+            }
+          }
   }
 
   ngOnInit(): void {

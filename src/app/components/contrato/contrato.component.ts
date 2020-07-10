@@ -208,8 +208,11 @@ export class ContratoComponent implements OnInit {
   }
 
   print(){
-    printJS({printable: this.contratoJSON, properties: ['fecha', 'titulo', 'descripcion', 'usuario.usuario'], type: 'json'})
-
+    printJS({printable: this.contratoJSON, properties: [{field:'fecha', displayName:'Fecha'},
+                                                        {field:'propietario.nombres'+'propietario.apellido', displayName:'Nombre Propietario'} ,
+                                                        {field:'locales', displayName:'Locales'} ,
+                                                        {field:'costoTotal', displayName:"Costo Total"} ], type: 'json'})
+    
   }
 
 

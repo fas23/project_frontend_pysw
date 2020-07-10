@@ -87,7 +87,7 @@
                             </div>
                             <div class="col-12">
                                 <button type="button" class="btn btn-primary mr-3" (click)="saveContrato()"
-                                [disabled]="!formregistro.form.valid || existe"><i class="fa fa-save"></i> Agregar</button>
+                                [disabled]="!formregistro.form.valid || existe || contrato.costoTotalAlq == 0"><i class="fa fa-save"></i> Agregar</button>
                             <button type="button" class="btn btn-primary align-content-center mr-3"
                                 [disabled]="!formregistro.form.valid || !existe || cerrado" (click)="modificarContrato()"><i class="far fa-edit"></i> Modificar</button>
                             <button type="button" class="btn btn-primary align-content-center" (click)="limpiar()"><i class="fa fa-trash"></i> Limpiar</button>
