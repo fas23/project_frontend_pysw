@@ -25,7 +25,7 @@ export class NoticiaComponent implements OnInit {
   usuarios : Array<Usuario>;
   modifica : boolean = false;  
   noticiaJSON: JSON;
-  //prueba mensaje posteo facebook
+  //posteo facebook
   mensaje: string = "";
 
   constructor(private noticiaServ:NoticiaService, private usuarioServ: UsuarioService, private _toastr: ToastrService,
@@ -140,13 +140,15 @@ export class NoticiaComponent implements OnInit {
 
 
   //implementacion ApiFacebook
-  postFb() {
+  postFb(noticia : Noticia) {
+    this.mensaje = noticia.titulo + ":  " + noticia.descripcion;
     var apiMethod: ApiMethod = "post";
     this.fb.api('/111204877317218/feed', apiMethod,
       {
         "message": this.mensaje,
-        "access_token": "EAAMppWZC1UQ0BACbtQpfG3ZAEJO0vxgeHBfv5wHii07UYPhh2pcP4ZAkh3mStgWsMPgJM9sLe78M4kWVk4S1ZAZAKghYKwgECesCoymryBocb9zQkkJWHkGTexOUNwQIE3RmN7kHb9qkWep0H3Rii0zSudtW34NncRh1TtZAfZAIT34E0KnpTeLBOBQco8vlWl1DrxlNevbkHhrXZAzazPEm"
+        "access_token": "EAAMppWZC1UQ0BAOWm3HbI4w73qQanFPTRCJLR70F2CXTcoUlmLhdZBnM1gcpjPYZBmeVOrS22LzHsjz4Ao3Oxk21SEITEsEObYF0EJz2HRNFMeuHDysydwFXlcNMP6NjGZCuCSIfPhR5zoHcm0BZBslMPYzObIUZCl5LvlwAUDSBa7GzZBIWZAm7uNX3MghOZChrZBCglcZBYaZAPZCKIEHbD83L9"
       });
+      this._toastr.success("Posteo Registrado", "Exito");
   }
 
   iniciarFb() {

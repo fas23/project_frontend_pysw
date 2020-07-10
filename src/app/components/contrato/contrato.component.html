@@ -1,6 +1,6 @@
 <div *ngIf="loginService.userLoggedIn">
     <div *ngIf="loginService.userLogged.perfil == 'administrativo' || loginService.userLogged.perfil == 'administrador'">
-        <div class="container">
+        <div class="container mt-5">
             <div class="card">
                 <div class="card-header">
                     <div class="card-header bg-info mb-3">
@@ -150,6 +150,10 @@
                         </table>
                     </div>
                 </div>
+
+                <div>
+                    <button class="btn btn-primary" (click)="print()">Imprimir Contratos</button>
+                  </div>
             </div>
         </div>
     </div>

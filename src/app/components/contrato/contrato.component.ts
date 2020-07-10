@@ -6,6 +6,9 @@ import { Propietario } from 'src/app/models/propietario';
 import { Local } from './../../models/local';
 import {UsuarioService} from './../../services/usuario.service';
 
+//imprimir reportes 
+import * as printJS from 'print-js';
+
 @Component({
   selector: 'app-contrato',
   templateUrl: './contrato.component.html',
@@ -19,6 +22,7 @@ export class ContratoComponent implements OnInit {
   propietarios: Array<Propietario>;
   locales: Array<Local>;
   cerrado : boolean = false;
+  contratoJSON: JSON;
 
   constructor(private conService: ContratoService, private _toastr: ToastrService, public loginService:UsuarioService) {
     this.contrato = new Contrato();
@@ -102,6 +106,7 @@ export class ContratoComponent implements OnInit {
           Object.assign(cont, element);
           this.contratos.push(cont);
           cont = new Contrato();
+          this.contratoJSON = result;
         });
       },
       (error) => {
@@ -201,6 +206,12 @@ export class ContratoComponent implements OnInit {
     );
     this.listarContratos();
   }
+
+  print(){
+    printJS({printable: this.contratoJSON, properties: ['fecha', 'titulo', 'descripcion', 'usuario.usuario'], type: 'json'})
+
+  }
+
 
   ngOnInit(): void {
   }

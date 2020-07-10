@@ -10,7 +10,6 @@ import { ToastrModule } from 'ngx-toastr';
 import {HttpClientModule} from '@angular/common/http';
 import { FacebookModule } from 'ngx-fb';
 import { AlifeFileToBase64Module } from 'alife-file-to-base64';
-
 import { HeaderComponent } from './components/layout/header/header.component';
 import { FooterComponent } from './components/layout/footer/footer.component';
 import { HomeComponent } from './components/home/home.component';

@@ -5,6 +5,9 @@ import {ToastrService} from 'ngx-toastr';
 import { NgForm } from '@angular/forms';
 import {UsuarioService} from './../../services/usuario.service';
 
+//imprimir reportes 
+import * as printJS from 'print-js';
+
 @Component({
   selector: 'app-local',
   templateUrl: './local.component.html',
@@ -16,6 +19,7 @@ export class LocalComponent implements OnInit {
   existe : boolean = false;
   local : Local;
   locales : Array<Local>;
+  localJSON: JSON;
 
   constructor(private localServ:LocalService, private _toastr:ToastrService, public loginService:UsuarioService) { 
     this.local = new Local();
@@ -83,6 +87,7 @@ export class LocalComponent implements OnInit {
           Object.assign(loc, element);
           this.locales.push(loc);
           loc = new Local();
+          this.localJSON = result;
         });
       },
       (error)=>{
@@ -117,6 +122,11 @@ export class LocalComponent implements OnInit {
         this._toastr.error(error,"Error");
       }
     )
+  }
+
+  print(){
+    printJS({printable: this.localJSON, properties: ['fecha', 'titulo', 'descripcion', 'usuario.usuario'], type: 'json'})
+
   }
 
   ngOnInit(): void {

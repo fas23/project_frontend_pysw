@@ -1,121 +1,144 @@
 <div *ngIf="loginService.userLoggedIn">
   <div *ngIf="loginService.userLogged.perfil == 'administrativo' || loginService.userLogged.perfil == 'administrador'">
-    <div class="container">
-      <div class="row">
-        <form #formNoticia="ngForm" class="col-md-10 offset-1">
-          <div class="card-header bg-info mb-3 mt-3">
-            <h2>Gestion de NOTICIAS</h2>
-          </div>
-          <div class="form-group row">
-            <label for="titulo" class="col-md-4 col-sm-12">Titulo</label>
-            <input type="text" class="form-control col-md-8 col-sm-12" id="titulo" name="titulo" #titulo="ngModel"
-              required minlength="10" placeholder="ingrese Titulo de Noticia" maxlength="50" [(ngModel)]="noti.titulo" />
-          </div>
-          <!--Validacion de titulo noticia-->
-          <div *ngIf="titulo.invalid && (titulo.dirty || titulo.touched)" class="alert alert-danger">
-            <div *ngIf="titulo.errors.required">
-              Titulo es requerido.
+    <div class="container mt-5">
+      <div class="card">
+        <div class="card-header">
+          <form #formNoticia="ngForm">
+            <div class="card-header bg-info mb-3">
+              <h2>Gestion de Noticias</h2>
             </div>
-            <div *ngIf="titulo.errors.minlength">
-              Titulo debe tener al menos 10 caracteres.
+            <div class="form-group row">
+              <label for="titulo" class="col-md-4 col-sm-12">Titulo</label>
+              <input type="text" class="form-control col-md-8 col-sm-12" id="titulo" name="titulo" #titulo="ngModel"
+                required minlength="10" placeholder="ingrese Titulo de Noticia" maxlength="50"
+                [(ngModel)]="noti.titulo" />
+
+              <!--Validacion de titulo noticia-->
+              <div *ngIf="titulo.invalid && (titulo.dirty || titulo.touched)" class="alert alert-danger">
+                <div *ngIf="titulo.errors.required">
+                  Titulo es requerido.
+                </div>
+                <div *ngIf="titulo.errors.minlength">
+                  Titulo debe tener al menos 10 caracteres.
+                </div>
+              </div>
             </div>
-          </div>
-  
-          <div class="form-group row">
-            <label for="descripcion" class="col-md-4 col-sm-12">Descripcion</label>
-            <textarea class="form-control col-md-8 col-sm-12" rows="6" name="textoNoti" #textoNoti="ngModel" required
-              minlength="20" [(ngModel)]="noti.descripcion">
+            <div class="form-group row">
+              <label for="descripcion" class="col-md-4 col-sm-12">Descripcion</label>
+              <textarea class="form-control col-md-8 col-sm-12" rows="6" name="textoNoti" #textoNoti="ngModel" required
+                minlength="20" [(ngModel)]="noti.descripcion">
                  </textarea>
-          </div>
-          <!--Validacion de Descripcion noticia-->
-          <div *ngIf="textoNoti.invalid && (textoNoti.dirty || textoNoti.touched)" class="alert alert-danger">
-            <div *ngIf="textoNoti.errors.required">
-              Descripcion es requerido.
+
+              <!--Validacion de Descripcion noticia-->
+              <div *ngIf="textoNoti.invalid && (textoNoti.dirty || textoNoti.touched)" class="alert alert-danger">
+                <div *ngIf="textoNoti.errors.required">
+                  Descripcion es requerido.
+                </div>
+                <div *ngIf="textoNoti.errors.minlength">
+                  Descripcion debe tener al menos 20 caracteres.
+                </div>
+              </div>
             </div>
-            <div *ngIf="textoNoti.errors.minlength">
-              Descripcion debe tener al menos 20 caracteres.
+            <div class="form-group row">
+              <label for="fecha" class="col-md-4 col-sm-12">Fecha * </label>
+              <input type="date" class="form-control col-md-8 col-sm-12" id="fecha" required name="fecha"
+                #fecha="ngModel" [(ngModel)]="noti.fecha" />
             </div>
+
+            <div class="form-group row">
+              <label for="vigente" class="col-md-6 col-sm-12">Se encuentra Vigente</label>
+              <input type="checkbox" class="form-control col-md-6 col-sm-12" id="vigente" name="vigente"
+                [(ngModel)]="noti.vigente">
+            </div>
+
+
+            <div class="form-group row">
+              <label for="idusuario" class="col-md-4 col-sm-12">Usuario Logeado : {{loginService.userLogged.usuario}}
+              </label>
+              <select id="idusuario" class="form-control col-md-8 col-sm-12" name="usuario" #usuario="ngModel"
+                [(ngModel)]="noti.usuario">
+                <option *ngFor="let user of usuarios" [ngValue]="user">{{user.usuario}}</option>
+              </select>
+            </div>
+
+          </form>
+        </div>
+
+        <div class="card-body form-group text-center">
+          <button type="button" class="btn btn-primary mx-3" type="submit" [disabled]="formNoticia.invalid"
+            (click)="altaNoticia()"><i class="fa fa-save"></i> Agregar</button>
+          <button type="button" class="btn btn-primary align-content-center mx-3" [disabled]="!modifica"
+            (click)="modificarNoticia()"><i class="fa fa-save"></i> Modificar</button>
+          <button type="button" class="btn btn-primary align-content-center mx-3" (click)="limpiarNoticia()"><i
+              class="fa fa-trash"></i> Limpiar</button>
+        </div>
+
+
+        <div class="card-footer">
+          <div class="table-responsive">
+            <table class="table table-striped" [mfData]="noticias" #mf="mfDataTable" [mfRowsOnPage]="5">
+              <thead>
+                <tr>
+                  <th style="width: 5%">
+                    <mfDefaultSorter by="">FECHA</mfDefaultSorter>
+                  </th>
+                  <th style="width: 10%">
+                    <mfDefaultSorter by="">TITULO</mfDefaultSorter>
+                  </th>
+                  <th style="width: 20%">
+                    <mfDefaultSorter by="">DESCRIPCION</mfDefaultSorter>
+                  </th>
+                  <th style="width: 5%">
+                    <mfDefaultSorter by="">Postear</mfDefaultSorter>
+                  </th>
+                  <th style="width: 5%">
+                    <mfDefaultSorter by="">USUARIO</mfDefaultSorter>
+                  </th>
+                  <th style="width: 5%">
+                    <mfDefaultSorter by="">VIGENTE</mfDefaultSorter>
+                  </th>
+                  <th style="width: 20%">
+                    <mfDefaultSorter by="">Opciones</mfDefaultSorter>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of mf.data">
+                  <td>{{item.fecha | date:"dd-MM-yyyy"}}</td>
+                  <td>{{item.titulo}}</td>
+                  <td>{{item.descripcion}}</td>
+                  <td> <button type="button" class="btn btn-primary" (click)="postFb(item)"><i
+                        class="fab fa-facebook"></i></button></td>
+                  <td>{{item.usuario.usuario}}</td>
+                  <td>{{item.vigente}}</td>
+                  <td>
+                    <button class="btn btn-success mr-2" (click)="elegirNoticia(item)"><i
+                        class="far fa-hand-point-up"></i>
+                      Seleccionar</button>
+                    <button class="btn btn-danger" (click)="borrarNoticia(item)"><i class="fa fa-trash"></i>
+                      Borrar</button>
+                  </td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td colspan="4">
+                    <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
+                  </td>
+                </tr>
+              </tfoot>
+            </table>
+
           </div>
-  
-          <div class="form-group row">
-            <label for="fecha" class="col-md-4 col-sm-12">Fecha * </label>
-            <input type="date" class="form-control col-md-8 col-sm-12" id="fecha" required name="fecha" #fecha="ngModel"
-              [(ngModel)]="noti.fecha" />
-          </div>
-  
-          <div class="form-group row">
-            <label for="vigente" class="col-md-6 col-sm-12">Se encuentra Vigente</label>
-            <input type="checkbox" class="form-control col-md-6 col-sm-12" id="vigente" name="vigente"
-              [(ngModel)]="noti.vigente">
-          </div>
-  
-  
-          <div class="form-group row">
-            <label for="idusuario" class="col-md-4 col-sm-12">Usuario Logeado : {{loginService.userLogged.usuario}}
-            </label>
-            <select id="idusuario" class="form-control col-md-8 col-sm-12" name="usuario" #usuario="ngModel"
-              [(ngModel)]="noti.usuario">
-              <option *ngFor="let user of usuarios" [ngValue]="user">{{user.usuario}}</option>
-            </select>
-          </div>
-          <div class="card-body text-center">
-            <button type="button" class="btn btn-primary mx-3" type="submit" [disabled]="formNoticia.invalid"
-              (click)="altaNoticia()"><i class="fa fa-save"></i> Agregar</button>
-            <button type="button" class="btn btn-primary align-content-center mx-3" [disabled]="!modifica"
-              (click)="modificarNoticia()"><i class="fa fa-save"></i> Modificar</button>
-            <button type="button" class="btn btn-primary align-content-center mx-3" (click)="limpiarNoticia()"><i
-                class="fa fa-trash"></i> Limpiar</button>
-          </div>
-        </form>
-  
-        <table class="table table-striped" [mfData]="noticias" #mf="mfDataTable" [mfRowsOnPage]="5">
-          <thead>
-            <tr>
-              <th style="width: 5%">
-                <mfDefaultSorter by="">FECHA</mfDefaultSorter>
-              </th>
-              <th style="width: 20%">
-                <mfDefaultSorter by="">TITULO</mfDefaultSorter>
-              </th>
-              <th style="width: 5%">
-                <mfDefaultSorter by="">USUARIO</mfDefaultSorter>
-              </th>
-              <th style="width: 5%">
-                <mfDefaultSorter by="">VIGENTE</mfDefaultSorter>
-              </th>
-              <th style="width: 20%">
-                <mfDefaultSorter by="">Opciones</mfDefaultSorter>
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let item of mf.data">
-              <td>{{item.fecha | date:"dd-MM-yyyy"}}</td>
-              <td>{{item.titulo}}</td>
-              <td>{{item.usuario.usuario}}</td>
-              <td>{{item.vigente}}</td>
-              <td>
-                <button class="btn btn-success mr-2" (click)="elegirNoticia(item)"><i class="far fa-hand-point-up"></i>
-                  Seleccionar</button>
-                <button class="btn btn-danger" (click)="borrarNoticia(item)"><i class="fa fa-trash"></i> Borrar</button>
-              </td>
-            </tr>
-          </tbody>
-          <tfoot>
-            <tr>
-              <td colspan="4">
-                <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
-              </td>
-            </tr>
-          </tfoot>
-        </table>
-  
+        </div>
+
         <div>
           <button class="btn btn-primary" (click)="print()">Imprimir Noticia</button>
         </div>
-  
+
       </div>
     </div>
-  
+
   </div>
+
 </div>
