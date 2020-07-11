@@ -41,6 +41,7 @@ export class LocalComponent implements OnInit {
     this.localServ.updateLocal(this.local).subscribe(
       (result)=>{
         this._toastr.success("Local actualizado","Exito");
+        this.listarLocales();
       },
       (error)=>{
         this._toastr.error(error,"Error");
@@ -48,19 +49,18 @@ export class LocalComponent implements OnInit {
     );
     this.local = new Local();
     this.existe = false;
-    this.listarLocales();
   }
    
   borrarLocal(loc: Local){
     this.localServ.deleteLocal(loc).subscribe(
       (result)=>{
         this._toastr.success("Local eliminado","Exito");
+        this.listarLocales();
       }, 
       (error)=>{
         this._toastr.error(error,"Error");
       }
     );
-    this.listarLocales();
   }
 
 
@@ -69,6 +69,7 @@ export class LocalComponent implements OnInit {
     this.localServ.addLocal(this.local).subscribe(
         (result)=>{
           this._toastr.success("Local guardado","Exito");
+          this.listarLocales();
         },
         (error)=>{
           this._toastr.error(error,"Error");
@@ -76,7 +77,6 @@ export class LocalComponent implements OnInit {
       ) 
       form.resetForm();
       this.local = new Local();
-      this.listarLocales();
   }
 
   listarLocales(){
@@ -127,7 +127,10 @@ export class LocalComponent implements OnInit {
   }
 
   print(){
-    printJS({printable: this.localJSON, properties: ['fecha', 'titulo', 'descripcion', 'usuario.usuario'], type: 'json'})
+    printJS({printable: this.localJSON, properties: [{field:'superficie', displayName:'Superficie'},
+                                                     {field:'costoMes', displayName:'Costo Mensual'},
+                                                     {field:'alquildo', displayName: 'Alquilado'},
+                                                     {field:'descripcion', displayName:'Descripcion'}], type: 'json'})
 
   }
 

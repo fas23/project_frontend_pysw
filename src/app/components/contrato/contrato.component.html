@@ -117,7 +117,6 @@
                                         <mfDefaultSorter by="fecha">Fecha</mfDefaultSorter>
                                     </th>
                                     <th scope="col">Propietario</th>
-                                    <th scope="col">Locales</th>
                                     <th scope="col">Contrato Cerrado</th>
                                     <th scope="col">
                                         <mfDefaultSorter by="costoTotalAlq">Costo Total</mfDefaultSorter>
@@ -130,7 +129,6 @@
                                     <td></td>
                                     <td>{{item.fecha | date:'dd-MM-yyyy'}}</td>
                                     <td>{{item.propietario.nombres}}</td>
-                                    <td>{{item.locales.superficie}}</td>
                                     <td>{{item.cerrado}}</td>
                                     <td>{{item.costoTotalAlq | currency: 'USD'}}</td>
                                     <td>

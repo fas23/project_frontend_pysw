@@ -38,12 +38,12 @@ export class NovedadComponent implements OnInit {
     this.servicio.updateNovedad(nov).subscribe(
       (result)=>{
         this._toastr.success("Novedad actualizada","Exito");
+        this.listarNovedades();
       },
       (error)=>{
         this._toastr.error(error,"Error");
       }
     );
-    this.listarNovedades();
   }
 
   listarNovedades(){

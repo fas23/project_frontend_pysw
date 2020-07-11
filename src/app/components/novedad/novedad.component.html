@@ -21,7 +21,7 @@
                             <div class="badge-info" *ngIf="item.estado == 'Procesado'">Estado: {{item.estado}}</div>
                             <div *ngIf="item.estado != 'Procesado'">Estado: {{item.estado}}</div>
                         </div>
-                        <button class="btn btn-lg btn-primary" (click)="modificarNovedad(item)">Procesado</button>
+                        <button class="btn btn-lg btn-primary" [disabled]="item.estado == 'Procesado'" (click)="modificarNovedad(item)">Procesado</button>
                     </div>
     
                 </div>

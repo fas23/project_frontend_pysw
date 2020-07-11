@@ -18,10 +18,10 @@ export class PropietarioComponent implements OnInit {
   propietarios: Array<Propietario>;
   propietarioJSON: JSON;
   existe : boolean = false;
+  emailVal : boolean = false;
 
   constructor(private propietarioService: PropietarioService, private _toastr: ToastrService, public loginService:UsuarioService
     ) {
-      
     this.propietario = new Propietario();
     this.propietarios = new Array<Propietario>();
     this.refrescarPropietarios();
@@ -111,5 +111,14 @@ limpiar(form: NgForm) {
   this.existe = false;
   this.propietario = new Propietario();
   form.resetForm();
+}
+
+validarEmail(){
+  this.emailVal = false;
+    for (let i = 0; i < this.propietarios.length; i++) {
+          if(this.propietarios[i].email == this.propietario.email){
+            this.emailVal = true;
+          }
+        }
 }
 }

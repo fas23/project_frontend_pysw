@@ -55,7 +55,7 @@ export class ContactoComponent implements OnInit {
       }
   
      addNovedad(){
-       if(this.usuarioServi.userLogged){
+       if(this.usuarioServi.userLoggedIn){
         this.getUsuario();
         this.novedad.usuario = this.usuario;
       }

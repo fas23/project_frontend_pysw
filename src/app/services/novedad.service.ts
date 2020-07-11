@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Novedad } from './../models/novedad';
+import {Usuario} from './../models/usuario';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,17 @@ export class NovedadService {
     return this._http.get( this.urlBase , httpOptions );
   }
 
+  
+  getNovedadesProp(usuario:Usuario):Observable<any>{
+    const httpOptions = {
+      headers: new HttpHeaders({
+
+      })
+    };
+    
+    return this._http.get( this.urlBase + usuario , httpOptions );
+  }
+
   addNovedad(novedad: Novedad):Observable<any>{
     const httpOptions = {
       headers: new HttpHeaders({
@@ -38,7 +50,7 @@ export class NovedadService {
 
       })
     };
-    return this._http.delete( this.urlBase + novedad.id , httpOptions );
+    return this._http.delete( this.urlBase + novedad._id , httpOptions );
   }
 
   updateNovedad(novedad: Novedad):Observable<any>{
@@ -48,7 +60,7 @@ export class NovedadService {
       })
     };
     var body = JSON.stringify(novedad);
-    return this._http.put(this.urlBase + novedad.id , body , httpOptions );    
+    return this._http.put(this.urlBase + novedad._id , body , httpOptions );    
 
   }
 

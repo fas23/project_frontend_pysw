@@ -51,7 +51,6 @@ export class NoticiaComponent implements OnInit {
           Object.assign(loc, element); 
           this.noticias.push(loc); 
           loc = new Noticia();
-          console.log(result);
           this.noticiaJSON = result;
         });
       },
@@ -80,7 +79,9 @@ export class NoticiaComponent implements OnInit {
   }
 
   print(){
-    printJS({printable: this.noticiaJSON, properties: ['fecha', 'titulo', 'descripcion', 'usuario.usuario'], type: 'json'})
+    printJS({printable: this.noticiaJSON, properties: [{field:'fecha', displayName:'Fecha'},
+    {field:'titulo', displayName:'Titulo'}, {field:'descripcion', displayName:'Descripcion'},
+    {field:'usuario.usuario', displayName:'Usuario'}], type: 'json'})
 
   }
 
@@ -99,6 +100,7 @@ export class NoticiaComponent implements OnInit {
 
   //CRUD noticia 
   altaNoticia(form:NgForm){
+    this.noti.fecha = new Date();
     this.noticiaServ.addNoticia(this.noti).subscribe(
       (result) => {
         this._toastr.success("Noticia Registrada", "Exito");

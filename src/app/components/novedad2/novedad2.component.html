@@ -1,24 +1,46 @@
-<table class="table table-striped" [mfData]="novedades" #mf="mfDataTable" [mfRowsOnPage]="5">
-    <thead>
-        <tr>
-            <th scope="col">Texto</th>
-            <th scope="col">Usuario</th>
-            <th scope="col">Estado</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let item of mf.data">
-            <td></td>
-            <td>{{item.Texto}}</td>
-            <td>{{item.Usuario.usuario}}</td>
-            <td>{{item.estado}}</td>
-        </tr>
-    </tbody>
-    <tfoot>
-        <tr>
-            <td colspan="4">
-                <mfBootstrapPaginator [rowsOnPageSet]="[5,10,20]"></mfBootstrapPaginator>
-            </td>
-        </tr>
-    </tfoot>
-</table>
+<div *ngIf="loginService.userLoggedIn && loginService.userLogged.perfil == 'propietario'">
+
+    <div class="container">
+        <div class="card">
+            <div class="card-body mt-2 mb-3">
+                <form #Formregistro="ngForm">
+                    <div class="form-group row">
+                        <label for="usuario" class="col-md-4 col-sm-12">Usuario: {{loginService.userLogged.usuario}}</label>
+                    </div>
+                    <div class="form-group row">
+                        <label for="texto" class="col-md-4 col-sm-12">Novedad</label>
+                        <textarea id="texto" class="form-control col-md-8 col-sm-12" type="text" name="texto"
+                            [(ngModel)]="novedad.texto" required #nom="ngModel" rows="4"></textarea>
+                        <div *ngIf="!nom.valid && (nom.dirty || nom.touched)" class="alert alert-danger col mt-3">
+                            <div *ngIf="nom.errors.required">
+                                Debe escribir algo 
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body form-group text-center">
+                        <button type="button" class="btn btn-primary mx-3" type="submit" [disabled]="Formregistro.invalid"
+                          (click)="addNovedad(Formregistro)"><i class="fa fa-save"></i> Agregar</button>
+                        <button type="button" class="btn btn-primary align-content-center mx-3" (click)="limpiar(Formregistro)"><i
+                            class="fa fa-trash"></i> Limpiar</button>
+                      </div>
+                </form>
+            </div>
+            
+    
+        </div>
+        <div class="row">
+            <div *ngFor="let nove of novedades" class="col-lg-4 col-md-6 mb-5">
+                  <div class="card-section card-section-third border rounded">
+                    <div class="card-header card-header-third rounded">
+                          <h2 class="card-header-title mb-3 text-white">{{nove.fecha | date:"dd-MM-yyyy"}}</h2>
+                    </div>
+                    <div class="card-bodyes text-center mb-2">
+                         <p class="card-text">{{nove.texto}}</p>
+                         <p class="card-text">Estado : {{nove.estado}}</p>
+                         <hr>
+                    </div>
+                  </div>
+            </div>
+        </div>
+    </div>
+</div>

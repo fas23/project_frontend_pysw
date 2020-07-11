@@ -49,6 +49,8 @@ export class ContratoComponent implements OnInit {
     this.conService.updateContrato(this.contrato).subscribe(
       (result) => {
         this._toastr.success("Contrato actualizado", "Exito");
+        this.listarContratos();
+        this.obtenerLocales();
       },
       (error) => {
         this._toastr.error(error, "Error");
@@ -57,8 +59,6 @@ export class ContratoComponent implements OnInit {
     this.contrato = new Contrato();
     this.existe = false;
     //this.modificarLocal();
-    this.listarContratos();
-    this.obtenerLocales();
   }
 
   borrarContrato(cont: Contrato) {
@@ -67,15 +67,15 @@ export class ContratoComponent implements OnInit {
     this.conService.deleteContrato(cont).subscribe(
       (result) => {
         this._toastr.success("Contrato eliminado", "Exito");
+        for (let i = 0; i < cont.locales.length; i++){
+          this.quitarLocal(cont.locales[i]);
+          }
+        this.listarContratos();
       },
       (error) => {
         this._toastr.error(error, "Error");
       }
     );
-    for (let i = 0; i < cont.locales.length; i++){
-    this.quitarLocal(cont.locales[i]);
-    }
-    this.listarContratos();
   }
 
 
@@ -85,6 +85,8 @@ export class ContratoComponent implements OnInit {
     this.conService.addContrato(this.contrato).subscribe(
       (result) => {
         this._toastr.success("Contrato guardado", "Exito");
+        this.obtenerLocales();
+        this.listarContratos();
       },
       (error) => {
         this._toastr.error(error, "Error");
@@ -93,8 +95,7 @@ export class ContratoComponent implements OnInit {
     this.locales = new Array<Local>();
     this.contrato = new Contrato();
     //this.modificarLocal();
-    this.obtenerLocales();
-    this.listarContratos();
+    
   }
 
   listarContratos() {
@@ -137,7 +138,6 @@ export class ContratoComponent implements OnInit {
         console.log(error);
       }
     )
-    console.log("propietarios   " + this.propietarios);
   }
 
   obtenerLocales() {
@@ -169,9 +169,6 @@ export class ContratoComponent implements OnInit {
 
 
   modificarLocal(local:Local) {
-    // for (let i = 0; i < this.contrato.locales.length; i++) {
-    //     this.contrato.locales[i].alquilado = true;
-//    this.conService.updateLocal(this.contrato.locales[i]).subscribe(
       this.conService.updateLocal(local).subscribe(
         (result) => {
         console.log("Local modificado");
@@ -179,7 +176,7 @@ export class ContratoComponent implements OnInit {
       (error) => {
         this._toastr.error(error, "Error");
       }
-    );//}
+    );
   }
 
   quitarLocal(local: Local) {
@@ -209,9 +206,11 @@ export class ContratoComponent implements OnInit {
 
   print(){
     printJS({printable: this.contratoJSON, properties: [{field:'fecha', displayName:'Fecha'},
-                                                        {field:'propietario.nombres'+'propietario.apellido', displayName:'Nombre Propietario'} ,
-                                                        {field:'locales', displayName:'Locales'} ,
-                                                        {field:'costoTotal', displayName:"Costo Total"} ], type: 'json'})
+                                                        {field:'propietario.nombres', displayName:'Nombre'} ,
+                                                        {field:'propietario.apellido', displayName:'Apellio'},
+                                                        {field:'propietario.dni', displayName:'DNI'},
+                                                        //{field:'locales', displayName:'Locales'} ,
+                                                        {field:'costoTotalAlq', displayName:"Costo Total"} ], type: 'json'})
     
   }
 

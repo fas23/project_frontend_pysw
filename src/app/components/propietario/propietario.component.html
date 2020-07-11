@@ -43,9 +43,12 @@
                         <div class="form-group row">
                             <label for="idemail" class="col-md-4">Email</label>
                             <input id="idemail" class="form-control form-control-sm col-md-8" type="text" name="email"
-                                required #email="ngModel" [(ngModel)]="propietario.email">
+                                required #email="ngModel" [(ngModel)]="propietario.email" (change)="validarEmail()"
+                                pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
                         </div>
-
+                        <div *ngIf="emailVal" class="alert alert-danger col mt-3">
+                            El email ingresado ya existe para otro propietario.
+                        </div>
                         <div class="form-group row">
                             <label for="idtelefono" class="col-md-4">Teléfono</label>
                             <input id="idtelefono" class="form-control form-control-sm col-md-8" type="number"
@@ -64,7 +67,7 @@
                 <div class="card-body form-group text-center">
                     <div class="form-group text-center">
                         <button class="btn btn-primary ml-2 mr-2" type="submit"
-                            [disabled]="!ngFormregistro.form.valid || existe"><i class="fa fa-save"
+                            [disabled]="!ngFormregistro.form.valid || existe || emailVal"><i class="fa fa-save"
                             (click)="guardarPropietario(ngFormregistro)"></i>Guardar</button>
                         <button class="btn btn-primary ml-2 mr-2" (click)="modificarPropietario()"
                             [disabled]="!ngFormregistro.form.valid || !existe"><i class="far fa-edit"></i>
