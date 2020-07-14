@@ -67,6 +67,7 @@ elegirPropietario(propietario: Propietario) {
 
 //crud Propietarios
 guardarPropietario(form: NgForm) {
+  console.log(this.propietario);
   this.propietarioService.addPropietario(this.propietario).subscribe(
     (result) => {
       console.log(result);

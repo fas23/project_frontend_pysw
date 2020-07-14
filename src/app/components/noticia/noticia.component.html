@@ -46,12 +46,12 @@
             </div>
 
             <div class="form-group row">
-              <label for="idusuario" class="col-md-4 col-sm-12">Usuario Logeado: {{loginService.userLogged.usuario}}
+              <label for="idusuario" class="col-md-4 col-sm-12">Usuario Logeado/Autorizado: --> {{loginService.userLogged.usuario}}
               </label>
-              <select id="idusuario" class="form-control col-md-8 col-sm-12" name="usuario" #usuario="ngModel"
+              <!--<select id="idusuario" class="form-control col-md-8 col-sm-12" name="usuario" #usuario="ngModel"
                 [(ngModel)]="noti.usuario">
                 <option *ngFor="let user of usuarios" [ngValue]="user">{{user.usuario}}</option>
-              </select>
+              </select> -->
             </div>
 
           </form>

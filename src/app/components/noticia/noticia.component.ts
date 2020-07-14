@@ -19,6 +19,7 @@ import { ApiMethod } from 'ngx-fb/dist/esm/providers/facebook';
 })
 export class NoticiaComponent implements OnInit {
 
+  usuario: Usuario;
   vigencia : boolean = false;
   noti : Noticia;
   noticias : Array<Noticia>; 
@@ -31,15 +32,30 @@ export class NoticiaComponent implements OnInit {
   constructor(private noticiaServ:NoticiaService, private usuarioServ: UsuarioService, private _toastr: ToastrService,
     private fb: FacebookService, public loginService: UsuarioService) { 
       this.noti = new Noticia();
-      this.noticias = new Array<Noticia>();      
-      this.listarNoticias();
-      this.listarUsuarios();
+      this.noti.usuario = new Usuario();
+      this.noticias = new Array<Noticia>();    
+      this.usuario = new Usuario();  
+      this.getUsuario();
+      this.listarNoticias();      
+      this.listarUsuarios();    // para llenar el combo
       this.noti.vigente= false;
       //iniciar la variables Api
       this.iniciarFb();
   }
 
+  getUsuario(){
+    this.usuario = new Usuario();
+    this.loginService.getUsuario(this.loginService.userLogged.usuario).subscribe(
+      (result) => {
+        console.log(result);
+        var usu : Usuario = new Usuario;
+        usu = result;
+        Object.assign(this.usuario,usu);
+      }
+    )
   
+}
+
   // trae las noticias de la API
   listarNoticias(){
     this.noticias = new Array<Noticia>();
@@ -52,6 +68,8 @@ export class NoticiaComponent implements OnInit {
           this.noticias.push(loc); 
           loc = new Noticia();
           this.noticiaJSON = result;
+          console.log("aqui");
+          console.log(this.noticias);
         });
       },
       (error)=>{
@@ -100,6 +118,8 @@ export class NoticiaComponent implements OnInit {
 
   //CRUD noticia 
   altaNoticia(form:NgForm){
+    console.log(this.usuario);
+    this.noti.usuario = this.usuario;
     this.noti.fecha = new Date();
     this.noticiaServ.addNoticia(this.noti).subscribe(
       (result) => {
