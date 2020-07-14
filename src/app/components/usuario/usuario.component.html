@@ -8,10 +8,13 @@
                     </div>
                     <div class="form-group row">
                         <label for="usu" class="col-md-4 col-sm-12">Usuario</label>
-                        <select id="usu" class="form-control form-control-sm col-md-8 col-sm-12" required name="usu"
+                        <!-- <select id="usu" class="form-control form-control-sm col-md-8 col-sm-12" required name="usu"
                             #prop="ngModel" [(ngModel)]="usuario.usuario" (change)="validarUsuario()">
                             <option *ngFor="let prop of propietarios" [ngValue]="prop">{{prop}}</option>
-                        </select>
+                        </select> -->
+                        <input type="email" id="usu" class="col-md-8 col-sm-12" name="usu"
+                        #prop="ngModel" [(ngModel)]="usuario.usuario" (change)="validarUsuario()"
+                        pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
                         <div class="col-md-4"></div>
                         <small id="emailHelp" class="form-text text-muted col-md-8 col-sm-12"><a class="nav-link" [routerLink]="['/propietario']" routerLinkActive="router-link-active">Ir a gestion de propietario</a></small>
                         <div *ngIf="!valido" class="alert alert-danger col-12">

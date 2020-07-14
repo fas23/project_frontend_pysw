@@ -48,6 +48,7 @@ export class UsuarioService {
             
           })
         };
+        console.log(this.urlBase + usuario);
         return this._http.get(this.urlBase + usuario, httpOptions);
       }
     

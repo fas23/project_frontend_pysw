@@ -27,11 +27,10 @@ export class NovedadService {
   getNovedadesProp(usuario:Usuario):Observable<any>{
     const httpOptions = {
       headers: new HttpHeaders({
-
       })
     };
     
-    return this._http.get( this.urlBase + usuario , httpOptions );
+    return this._http.get( this.urlBase+"prop/:" + usuario , httpOptions );
   }
 
   addNovedad(novedad: Novedad):Observable<any>{

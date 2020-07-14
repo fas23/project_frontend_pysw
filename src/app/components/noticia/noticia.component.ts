@@ -150,7 +150,7 @@ export class NoticiaComponent implements OnInit {
     this.fb.api('/111204877317218/feed', apiMethod,
       {
         "message": this.mensaje,
-        "access_token": "EAAMppWZC1UQ0BAOWm3HbI4w73qQanFPTRCJLR70F2CXTcoUlmLhdZBnM1gcpjPYZBmeVOrS22LzHsjz4Ao3Oxk21SEITEsEObYF0EJz2HRNFMeuHDysydwFXlcNMP6NjGZCuCSIfPhR5zoHcm0BZBslMPYzObIUZCl5LvlwAUDSBa7GzZBIWZAm7uNX3MghOZChrZBCglcZBYaZAPZCKIEHbD83L9"
+        "access_token": "EAAMppWZC1UQ0BAJQBfyKYocZCUIW8Cvsx1jO21igdGcUeEspYwj4UQZC8jKlZC1xVdWpDUuDDtTWdVmsBMYFDd6ZCSZBMcKGAyZBJ9fZBg9CdZCs4aU2w74OZBraKpsoMlbTCt1pMZBOSBkV6PM1p7D7R7F959nEZBr9ZBHbyZBtVcenjeUqv5ZBwtaQLfKP91c3pzroUSZCS9ls5saL0sXbPA6iMG9P"
       });
       this._toastr.success("Posteo Registrado", "Exito");
   }

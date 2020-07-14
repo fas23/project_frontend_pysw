@@ -16,38 +16,44 @@ export class Novedad2Component implements OnInit {
   novedad: Novedad;
   novedades: Array<Novedad>;
   usuario : Usuario;
+  usuarios : Array<Usuario>;
 
   constructor(private servicio: NovedadService, private _toastr: ToastrService, public loginService : UsuarioService) { 
     this.novedad = new Novedad();
+    this.novedad.usuario = new Usuario();
     this.novedades = new Array<Novedad>();
     this.usuario = new Usuario();
+    this.usuarios = new Array<Usuario>();
+    this.getUsuario();
     this.getNovedades();
   }
 
   getUsuario(){
-    if(this.loginService.userLoggedIn){
+      this.usuario = new Usuario();
       this.loginService.getUsuario(this.loginService.userLogged.usuario).subscribe(
         (result) => {
-          console.log("resulttttttt" + result);
+          console.log(result);
           var usu : Usuario = new Usuario;
           usu = result;
-          this.usuario = usu;
+          Object.assign(this.usuario,usu);
         }
       )
-     }
     
-   }
+  }
+
 
   getNovedades(){
     if(this.loginService.userLoggedIn){
       this.novedades = new Array<Novedad>();
-      this.servicio.getNovedades().subscribe(
+      console.log(this.usuario);
+      this.servicio.getNovedadesProp(this.usuario).subscribe(
         (result)=>{
           var nv: Novedad = new Novedad();
           result.forEach(element => {
+            console.log(element);
             Object.assign(nv, element);
               this.novedades.push(nv);
-            nv = new Novedad();
+              nv = new Novedad();
           });
         },
         (error)=>{
@@ -58,7 +64,6 @@ export class Novedad2Component implements OnInit {
   }
 
   addNovedad(form:NgForm){
-      this.getUsuario();
       console.log(this.usuario);
       this.novedad.usuario = this.usuario;
       this.novedad.estado = "Pendiente";
@@ -80,6 +85,25 @@ export class Novedad2Component implements OnInit {
   limpiar(form:NgForm){
     this.novedad = new Novedad();
     form.resetForm();
+  }
+
+
+  listarUsuario(){
+    this.usuarios = new Array<Usuario>();
+    this.loginService.getUsuarios().subscribe(
+      (result)=>{
+        var vusuario: Usuario = new Usuario();  
+        result.forEach(element => {
+          Object.assign(vusuario, element); 
+          this.usuarios.push(vusuario); 
+          vusuario = new Usuario();
+          console.log(result);
+        });
+      },
+      (error)=>{
+        console.log(error);
+      } 
+    )
   }
 
   ngOnInit(): void {
