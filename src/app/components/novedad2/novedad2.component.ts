@@ -45,15 +45,18 @@ export class Novedad2Component implements OnInit {
   getNovedades(){
     if(this.loginService.userLoggedIn){
       this.novedades = new Array<Novedad>();
-      console.log(this.usuario);
-      this.servicio.getNovedadesProp(this.usuario).subscribe(
+      this.servicio.getNovedades().subscribe(
         (result)=>{
           var nv: Novedad = new Novedad();
           result.forEach(element => {
-            console.log(element);
+            //console.log(element);
             Object.assign(nv, element);
-              this.novedades.push(nv);
-              nv = new Novedad();
+            if(nv.usuario != null){
+              if(nv.usuario.usuario == this.loginService.userLogged.usuario){
+                this.novedades.push(nv);
+              }
+            }
+             nv = new Novedad();
           });
         },
         (error)=>{
