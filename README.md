@@ -1,6 +1,9 @@
 # Administración de Galería Comercial
 
 El sistema cuenta con un registro de usuarios los cuales pueden acceder al sistema según permisos establecidos.
+Deploy- https://alquiler-angular.herokuapp.com
+login- email: admin@gmail.com
+       password: admin
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.3.
 
